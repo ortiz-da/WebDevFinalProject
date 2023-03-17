@@ -29,7 +29,6 @@ const ProfilePage = () => {
                 <img src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"} className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>
             </div>
 
-
             <h2>Following</h2>
             <div className={"border border-primary rounded"}>
                 <img src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"} className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>
@@ -47,14 +46,10 @@ const ProfilePage = () => {
                 <li className={"list-group-item"}>Test</li>
             </ul>
 
-            <h2>Comment activity</h2>
-            <ul className={"list-group"}>
-                <li className={"list-group-item"}>Test</li>
-                <li className={"list-group-item"}>Test</li>
-                <li className={"list-group-item"}>Test</li>
-                <li className={"list-group-item"}>Test</li>
-                <li className={"list-group-item"}>Test</li>
-            </ul>
+
+
+
+
 
 
 

@@ -6,7 +6,7 @@ const SearchPage = () => {
         <>
             <Navigation/>
             <h1>Search</h1>
-            <div className={"input-group"}>
+            <div className={"input-group mx-5"}>
                 <input type={"text"} className={"form-control"}/>
                 <div className={"input-group-append"}>
                     <button className={"btn btn-outline-secondary"}>Search</button>
