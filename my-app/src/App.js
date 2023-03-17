@@ -11,20 +11,20 @@ import SearchPage from "./Search";
 
 function App() {
   return (
+      <div className={"container"}>
+          <BrowserRouter>
+              <div className={"container-fluid"}>
+                  <Routes>
+                      <Route index element={<HomePage/>}></Route>
+                      <Route path={"/details"} element={<DetailsPage/>}></Route>
+                      <Route path={"/login"} element={<LoginPage/>}></Route>
+                      <Route path={"/profile"} element={<ProfilePage/>}></Route>
+                      <Route path={"/search"} element={<SearchPage/>}></Route>
 
-      <BrowserRouter>
-          <div className={"container-fluid"}>
-              <Routes>
-                  <Route index element={<HomePage/>}></Route>
-                  <Route path={"/details"} element={<DetailsPage/>}></Route>
-                  <Route path={"/login"} element={<LoginPage/>}></Route>
-                  <Route path={"/profile"} element={<ProfilePage/>}></Route>
-                  <Route path={"/search"} element={<SearchPage/>}></Route>
-
-              </Routes>
-          </div>
-      </BrowserRouter>
-
+                  </Routes>
+              </div>
+          </BrowserRouter>
+      </div>
   );
 }
 

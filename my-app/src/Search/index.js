@@ -5,7 +5,14 @@ const SearchPage = () => {
     return(
         <>
             <Navigation/>
-            <h1>DetailsPage</h1>
+            <h1>Search</h1>
+            <div className={"input-group"}>
+                <input type={"text"} className={"form-control"}/>
+                <div className={"input-group-append"}>
+                    <button className={"btn btn-outline-secondary"}>Search</button>
+                </div>
+
+             </div>
 
         </>
     )
