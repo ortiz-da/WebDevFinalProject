@@ -12,9 +12,10 @@ const ProfilePage = () => {
 
                 </div>
                 <div className={"col-9"}>
-                    <h2>Username</h2>
-                    <h2>Email</h2>
-                    <h2>Phone</h2>
+                    <div></div>
+                    <h2>Username</h2>User1
+                    <h2>Email</h2>TestEmail
+                    <h2>Phone</h2>TestPhone
 
                 </div>
             </div>
@@ -46,14 +47,9 @@ const ProfilePage = () => {
                 <li className={"list-group-item"}>Test</li>
             </ul>
 
-
-
-
-
-
-
-
         </>
     )
 }
+
+
 export default ProfilePage
