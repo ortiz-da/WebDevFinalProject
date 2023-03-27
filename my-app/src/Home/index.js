@@ -10,7 +10,6 @@ const HomePage = () => {
         <>
             <Navigation/>
             <h1>Home</h1>
-            <img src={"https://cataas.com/cat/says/cat"}/>
 
             <GameSummaryComponent gameData={{}}></GameSummaryComponent>
         </>

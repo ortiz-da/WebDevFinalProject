@@ -38,7 +38,7 @@ const ProfilePage = () => {
 
             </div>
 
-            <h2>Favorites</h2>
+            <h2>Liked Games</h2>
             <ul className={"list-group"}>
                 <li className={"list-group-item"}>Test</li>
                 <li className={"list-group-item"}>Test</li>
@@ -46,6 +46,13 @@ const ProfilePage = () => {
                 <li className={"list-group-item"}>Test</li>
                 <li className={"list-group-item"}>Test</li>
             </ul>
+
+            <h2>Liked Comments</h2>
+
+
+            <h2>Comments Made</h2>
+
+
 
         </>
     )

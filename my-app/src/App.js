@@ -8,7 +8,6 @@ import LoginPage from "./Login";
 import ProfilePage from "./Profile";
 import SearchPage from "./Search";
 
-
 function App() {
   return (
       <div className={"container"}>
