@@ -1,8 +1,0 @@
-test
-
-Your Web application must have at least the following six (6) distinct screens:
-Login/Register,
-Home,
-Profile,
-Search/results,
-Details.
