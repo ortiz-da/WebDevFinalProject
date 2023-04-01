@@ -15,10 +15,11 @@ function App() {
               <div className={"container-fluid"}>
                   <Routes>
                       <Route index element={<HomePage/>}></Route>
-                      <Route path={"/details"} element={<DetailsPage/>}></Route>
+                      <Route path={"/details/:gameId"} element={<DetailsPage/>}></Route>
                       <Route path={"/login"} element={<LoginPage/>}></Route>
                       <Route path={"/profile"} element={<ProfilePage/>}></Route>
-                      <Route path={"/search"} element={<SearchPage/>}></Route>
+                      <Route path={"/search/:criteria"} element={<SearchPage/>}></Route>
+                      <Route path={"/search/"} element={<SearchPage/>}></Route>
 
                   </Routes>
               </div>
