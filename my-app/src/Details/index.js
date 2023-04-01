@@ -29,9 +29,9 @@ const DetailsPage = () => {
 
 
 
+
     return(
         <>
-            <h1>{gameId}</h1>
             <Navigation/>
             <h1>DetailsPage</h1>
 
@@ -41,8 +41,9 @@ const DetailsPage = () => {
                 <div className={"position-absolute start-0 bottom-0 text-light m-2 fs-2 fw-bold"}><i className={"far fa-heart"}></i> {details.name}</div>
             </div>
             <h2>About</h2>
-            <p>{details.description} </p>
 
+            {/*https://medium.com/@uigalaxy7/how-to-render-html-in-react-7f3c73f5cafc*/}
+            <div className={"border rounded border-primary p-3 my-4"} dangerouslySetInnerHTML={{__html: details.description}}></div>
 
             <div className={"container"}>
                 <div className={"row"}>
@@ -53,10 +54,24 @@ const DetailsPage = () => {
                         <div className={"row border-bottom border-primary border-end fw-bolder"}>Subreddit</div>
                     </div>
                     <div className={"col"}>
-                        <div className={"row border-top border-bottom border-primary"}><a className={"p-0"} href={details.website}>{details.website}</a></div>
-                        <div className={"row border-bottom border-primary "}>{details.released}</div>
-                        <div className={"row border-bottom border-primary "}>{details.metacritic}</div>
-                        <div className={"row border-bottom border-primary"}><a className={"p-0"} href={details.reddit_url}>{details.reddit_url}</a></div>
+                        <div className={"row border-top border-bottom border-primary"}>
+                            {
+                                details.website === "" ? "N/A":
+                                    <a className={"p-0"} href={details.website}>{details.website}</a>
+                            }
+
+                        </div>
+                        <div className={"row border-bottom border-primary "}>{details.released === "" ? "N/A" : details.released}</div>
+                        <div className={"row border-bottom border-primary "}>{details.metacritic === null ? "N/A" : details.metacritic}</div>
+                        <div className={"row border-bottom border-primary"}>
+                            {
+                                details.reddit_url === "" ? "N/A":
+                                    <a className={"p-0"} href={details.reddit_url}>
+                                        {details.reddit_url}
+                                    </a>
+                            }
+
+                        </div>
 
                     </div>
                 </div>

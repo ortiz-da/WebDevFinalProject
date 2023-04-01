@@ -7,12 +7,12 @@ const HomePage = () => {
 
 
     return(
-        <>
+        <div>
             <Navigation/>
             <h1>Home</h1>
 
             <GameSummaryComponent gameData={{}}></GameSummaryComponent>
-        </>
+        </div>
     )
 }
 export default HomePage

@@ -9,11 +9,7 @@ const SearchPage = () => {
 
     const navigate = useNavigate()
 
-    let {criteria} = useParams()
-
-
-    const [searchText, setSearchText] = useState(criteria);
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
 
     const searchChangeHandler = (event) => {
@@ -24,33 +20,25 @@ const SearchPage = () => {
 
     const searchButtonHandler = async () => {
         // reference: https://stackoverflow.com/questions/49938266/how-to-return-values-from-async-functions-using-async-await-from-function
-        const results = await apiSearch(searchText)
-        setSearchResults(results)
-        navigate(`/search/${searchText}`)
+        navigate(`/results/${searchText}`)
     }
 
     return (
         <>
             <Navigation/>
-            <div className={"input-group"}>
-                <input type={"text"} className={"form-control"} placeholder={"Search"} onChange={searchChangeHandler}
-                       value={searchText}></input>
-                <button className={"btn btn-outline-secondary"} type={"button"} onClick={searchButtonHandler}>Search
-                </button>
+            <h1>Search</h1>
+            <div className={"row"}>
+                <div className={"col-6"}>
+                    <div className={"input-group"}>
+                        <input type={"text"} className={"form-control rounded-start"} placeholder={"Search"} onChange={searchChangeHandler}
+                               value={searchText}></input>
+                        <button className={"btn btn-outline-primary"} type={"button"} onClick={searchButtonHandler}>Search
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <h3>{searchResults.length}</h3>
-            <ul className={"list-group"}>
-                {
-                    searchResults.map((result) =>
-                        <div className={"card my-3"} style={{width: "18rem"}}>
-                            <Link to={`/details/${result.id}`}><h4 className={"card-title"}>{result.name}</h4></Link>
 
-                            <img className={"card-img-top"} src={result.background_image}></img>
-                        </div>
-                    )
-                }
-            </ul>
         </>
     )
 }

@@ -5,7 +5,6 @@ import {Link, useLocation} from "react-router-dom";
 // https://getbootstrap.com/docs/4.0/components/navbar/
 const Navigation = () => {
     const pathName = useLocation().pathname;
-
     return (
         <nav className={"navbar-dark py-3"}>
             <Link className={"nav-link"} to={"/profile"}><img
@@ -16,13 +15,13 @@ const Navigation = () => {
                     {/*REFERECE: https://www.pluralsight.com/guides/applying-classes-conditionally-react*/}
                     <li className={"nav-item"}><Link className={`nav-link ${pathName === "/" ? "active" : ""}`}
                                                      to={"/"}>Home</Link></li>
-                    <li className={"nav-item"}><Link className={`nav-link ${pathName === "/details" ? "active" : ""}`}
-                                                     to={"/details"}>Details</Link></li>
+                    {/*<li className={"nav-item"}><Link className={`nav-link ${pathName === "/details" ? "active" : ""}`}*/}
+                    {/*                                 to={"/details"}>Details</Link></li>*/}
                     <li className={"nav-item"}><Link className={`nav-link ${pathName === "/login" ? "active" : ""}`}
                                                      to={"/login"}>Login</Link></li>
                     <li className={"nav-item"}><Link className={`nav-link ${pathName === "/profile" ? "active" : ""}`}
                                                      to={"/profile"}>Profile</Link></li>
-                    <li className={"nav-item"}><Link className={`nav-link ${pathName === "/search" ? "active" : ""}`}
+                    <li className={"nav-item"}><Link className={`nav-link ${(pathName === "/search" || pathName.includes("/results") || pathName.includes("/details")) ? "active" : ""}`}
                                                      to={"/search"}>Search</Link></li>
                 </ul>
         </nav>
