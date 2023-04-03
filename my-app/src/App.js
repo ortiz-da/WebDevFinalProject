@@ -8,25 +8,41 @@ import LoginPage from "./Login";
 import ProfilePage from "./Profile";
 import SearchPage from "./Search";
 import ResultsPage from "./Results";
+import {configureStore} from "@reduxjs/toolkit";
+import commentReducer from "./Reducers/comment-reducer";
+import {Provider} from "react-redux";
+
+
+const store = configureStore({
+        reducer: {
+            commentsData: commentReducer,
+            // userData: userReducer
+        }
+    }
+);
+
 
 function App() {
-  return (
-      <div className={"container"}>
-          <BrowserRouter>
 
-                  <Routes>
-                      <Route index element={<HomePage/>}></Route>
-                      <Route path={"/details/:gameId"} element={<DetailsPage/>}></Route>
-                      <Route path={"/login"} element={<LoginPage/>}></Route>
-                      <Route path={"/profile"} element={<ProfilePage/>}></Route>
-                      <Route path={"/search/"} element={<SearchPage/>}></Route>
-                      <Route path={"/results/:criteria"} element={<ResultsPage/>}></Route>
+    return (
+        <Provider store={store}>
+            <div className={"container"}>
+                <BrowserRouter>
+
+                    <Routes>
+                        <Route index element={<HomePage/>}></Route>
+                        <Route path={"/details/:gameId"} element={<DetailsPage/>}></Route>
+                        <Route path={"/login"} element={<LoginPage/>}></Route>
+                        <Route path={"/profile"} element={<ProfilePage/>}></Route>
+                        <Route path={"/search/"} element={<SearchPage/>}></Route>
+                        <Route path={"/results/:criteria"} element={<ResultsPage/>}></Route>
 
 
-                  </Routes>
-          </BrowserRouter>
-      </div>
-  );
+                    </Routes>
+                </BrowserRouter>
+            </div>
+        </Provider>
+    );
 }
 
 export default App;

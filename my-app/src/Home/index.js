@@ -11,7 +11,8 @@ const HomePage = () => {
             <Navigation/>
             <h1>Home</h1>
 
-            <GameSummaryComponent gameData={{}}></GameSummaryComponent>
+            <h2>Latest Post</h2>
+            <h2>Newest User</h2>
         </div>
     )
 }

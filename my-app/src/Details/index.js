@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import Navigation from "../Navigation";
-import CommentComponent from "./comment-component";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import apiDetails from "../API/details-request";
+import CommentBox from "./comment-box";
+import CommentList from "../Comments/comments-list";
 
 const DetailsPage = () => {
 
@@ -28,11 +29,14 @@ const DetailsPage = () => {
     },[])
 
 
+    let navigate = useNavigate();
 
 
     return(
         <>
             <Navigation/>
+            <button className={"btn btn-primary"} onClick={() => navigate(-1)}>Back</button>
+
             <h1>DetailsPage</h1>
 
             <div className={"position-relative mb-2"}>
@@ -77,11 +81,10 @@ const DetailsPage = () => {
                 </div>
             </div>
 
-            <h2>Discussion</h2>
 
-            {/*<CommentComponent></CommentComponent>*/}
-            {/*<CommentComponent></CommentComponent>*/}
-            {/*<CommentComponent></CommentComponent>*/}
+            <h2>Discussion</h2>
+            <CommentBox/>
+            <CommentList/>
 
         </>
     )
