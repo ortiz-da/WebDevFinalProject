@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Navigation from "../Navigation";
-import apiSearch from "../API/test-request";
+import {apiSearch} from "../API/game-service";
 import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 
 
@@ -9,7 +9,24 @@ const SearchPage = () => {
 
     const navigate = useNavigate()
 
-    const [searchText, setSearchText] = useState("");
+    let {query} = useParams()
+
+
+    const [searchText, setSearchText] = useState(query);
+
+    const [results, setResults] = useState([]);
+
+
+    useEffect( () => {
+
+        const getResults = async () => {
+            const results = await apiSearch(query)
+            console.log(results)
+            setResults(results)
+        }
+
+        getResults()
+    },[query])
 
 
     const searchChangeHandler = (event) => {
@@ -20,7 +37,7 @@ const SearchPage = () => {
 
     const searchButtonHandler = async () => {
         // reference: https://stackoverflow.com/questions/49938266/how-to-return-values-from-async-functions-using-async-await-from-function
-        navigate(`/results/${searchText}`)
+        navigate(`/search/${searchText}`)
     }
 
     return (
@@ -37,6 +54,17 @@ const SearchPage = () => {
                     </div>
                 </div>
             </div>
+            <ul className={"list-group"}>
+                {
+                    results.map((result) =>
+                        <div className={"card my-3"} key={result.id} style={{width: "18rem"}}>
+                            <Link to={`/details/${result.id}`}><h4 className={"card-title"}>{result.name}</h4></Link>
+
+                            <img className={"card-img-top"} src={result.background_image}></img>
+                        </div>
+                    )
+                }
+            </ul>
 
 
         </>

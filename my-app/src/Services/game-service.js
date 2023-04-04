@@ -29,7 +29,7 @@ export const getGameDetails = async (gameId) => {
 
 export const searchGames = async () => {
 
-    const url = `${API_BASE}games/?key=${API_KEY}`
+    const url = `${API_BASE}games?key=${API_KEY}`
 
 
     const options = {

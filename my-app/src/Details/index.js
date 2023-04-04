@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Navigation from "../Navigation";
 import {useNavigate, useParams} from "react-router-dom";
-import apiDetails from "../API/details-request";
+import {apiDetails} from "../API/game-service";
 import CommentBox from "./comment-box";
 import CommentList from "../Comments/comments-list";
 
