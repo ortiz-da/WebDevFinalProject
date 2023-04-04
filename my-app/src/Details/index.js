@@ -15,7 +15,7 @@ const DetailsPage = () => {
 
         const getDetails = async () => {
             const details = await getGameDetails(gameId)
-            console.log(details)
+            // console.log(details)
             setDetails(details)
         }
 

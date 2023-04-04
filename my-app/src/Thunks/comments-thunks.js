@@ -26,8 +26,9 @@ export const createCommentThunk = createAsyncThunk(
 export const updateCommentThunk =
     createAsyncThunk(
         'comments/updateComment',
-        async (comment) =>
+        async (comment) => {
             await service.updateComment(comment)
+        }
     )
 
 
