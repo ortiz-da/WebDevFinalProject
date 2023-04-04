@@ -11,11 +11,14 @@ import ResultsPage from "./Results";
 import {configureStore} from "@reduxjs/toolkit";
 import commentReducer from "./Reducers/comment-reducer";
 import {Provider} from "react-redux";
+import userReducer from "./Reducers/user-reducer";
+import RegisterPage from "./Register";
 
 
 const store = configureStore({
         reducer: {
             commentsData: commentReducer,
+            usersData: userReducer,
             // userData: userReducer
         }
     }
@@ -36,7 +39,7 @@ function App() {
                         <Route path={"/profile"} element={<ProfilePage/>}></Route>
                         <Route path={"/search/"} element={<SearchPage/>}></Route>
                         <Route path={"/search/:query"} element={<SearchPage/>}></Route>
-                        <Route path={"/results/:criteria"} element={<ResultsPage/>}></Route>
+                        <Route path={"/register"} element={<RegisterPage/>}></Route>
 
 
                     </Routes>
