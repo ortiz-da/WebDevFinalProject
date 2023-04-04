@@ -21,7 +21,7 @@ const Navigation = () => {
                                                      to={"/login"}>Login</Link></li>
                     <li className={"nav-item"}><Link className={`nav-link ${pathName === "/profile" ? "active" : ""}`}
                                                      to={"/profile"}>Profile</Link></li>
-                    <li className={"nav-item"}><Link className={`nav-link ${(pathName === "/search" || pathName.includes("/results") || pathName.includes("/details")) ? "active" : ""}`}
+                    <li className={"nav-item"}><Link className={`nav-link ${(pathName.includes("/search") || pathName.includes("/results") || pathName.includes("/details")) ? "active" : ""}`}
                                                      to={"/search"}>Search</Link></li>
                 </ul>
         </nav>

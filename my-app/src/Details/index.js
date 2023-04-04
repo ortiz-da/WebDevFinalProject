@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Navigation from "../Navigation";
 import {useNavigate, useParams} from "react-router-dom";
-import {apiDetails} from "../API/game-service";
+import {getGameDetails} from "../Services/game-service";
 import CommentBox from "./comment-box";
 import CommentList from "../Comments/comments-list";
 
@@ -11,16 +11,10 @@ const DetailsPage = () => {
 
     const [details, setDetails] = useState({});
 
-
-    const getDetails = async () => {
-        const details = await apiDetails(gameId)
-        console.log(details.valueOf())
-    }
-
     useEffect( () => {
 
         const getDetails = async () => {
-            const details = await apiDetails(gameId)
+            const details = await getGameDetails(gameId)
             console.log(details)
             setDetails(details)
         }
@@ -37,7 +31,7 @@ const DetailsPage = () => {
             <Navigation/>
             <button className={"btn btn-primary"} onClick={() => navigate(-1)}>Back</button>
 
-            <h1>DetailsPage</h1>
+            <h1>Details</h1>
 
             <div className={"position-relative mb-2"}>
 
