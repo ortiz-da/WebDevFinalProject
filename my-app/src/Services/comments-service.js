@@ -18,6 +18,7 @@ export const deleteComment = async (cid) => {
     return response.data
 }
 export const updateComment = async (comment) => {
+
     const response = await axios
         .put(`${COMMENTS_API}/${comment._id}`, comment);
 

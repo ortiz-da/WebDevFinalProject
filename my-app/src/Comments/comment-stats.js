@@ -34,8 +34,6 @@ const CommentStats = ({post}) => {
             const newLikeValue = true;
             const updatedComment = {...oldComment, liked: newLikeValue, likes: newLikeCount}
             setComment(updatedComment)
-            console.log(comment)
-
             dispatch(updateCommentThunk({
                 ...comment,
                 likes: comment.likes + 1,
