@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Navigation from "../Navigation";
-import {apiSearch} from "../API/game-service";
+import {searchGames} from "../Services/game-service";
 import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 
 
@@ -20,7 +20,7 @@ const SearchPage = () => {
     useEffect( () => {
 
         const getResults = async () => {
-            const results = await apiSearch(query)
+            const results = await searchGames(query)
             console.log(results)
             setResults(results)
         }

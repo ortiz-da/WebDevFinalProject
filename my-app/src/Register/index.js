@@ -3,6 +3,8 @@ import Navigation from "../Navigation";
 import * as userService from "../Services/user-service"
 import {useNavigate, useNavigation} from "react-router-dom";
 import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {registerThunk} from "../Thunks/user-thunks";
 // using code from: https://github.com/jannunzi/tuiter-react-web-app-cs4550-sp23/
 // https://www.w3schools.com/howto/howto_js_display_checkbox_text.asp
 const RegisterPage = () => {
@@ -10,17 +12,23 @@ const RegisterPage = () => {
     const [user, setUser] = useState({
         username: "username1",
         password: "password1",
-        role: "normal"
+        role: "normal",
+        pfp: "https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec"
     })
+
+    const dispatch = useDispatch();
+
 
     const navigate = useNavigate();
     const register = async () => {
 
-        var checkBox = document.getElementById("admin-check")
+        const checkBox = document.getElementById("admin-check");
 
-        setUser({...user, role: checkBox.checked ? "admin" : "normal"})
-
-        await userService.register(user);
+        // await userService.register(user);
+        dispatch(registerThunk({
+            ...user,
+             role: checkBox.checked ? "admin" : "normal"
+        }))
         navigate("/profile")
     }
 

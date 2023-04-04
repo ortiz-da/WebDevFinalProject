@@ -1,18 +1,7 @@
 import CommentStats from "./comment-stats";
 import React from "react";
 
-const commentItem = ({
-                         post = {
-                             "_id": 123,
-                             "username": "SpaceX",
-                             "time": "2h",
-                             "liked": true,
-                             "likes": 333,
-                             "commentText": "This is some example text that would fill a tuit."
-                         }
-                     }) => {
-
-
+const commentItem = ({post}) => {
     return (
         <div className="list-group-item p-1">
             <div className="row p-1">

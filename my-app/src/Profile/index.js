@@ -1,26 +1,31 @@
 import React from "react";
 import Navigation from "../Navigation";
+import {useSelector} from "react-redux";
 
 const ProfilePage = () => {
+
+
+    const currentUser = useSelector(state => state.usersData)
+
+
     return(
         <>
             <Navigation/>
             <h1>ProfilePage</h1>
             <div className={"row"}>
                 <div className={"col-3"}>
-                    <img src={"https://www.georgiaaquarium.org/wp-content/uploads/2018/09/beluga-whale-webcam-9.jpg"} className={"img-thumbnail rounded-circle"} width={200} height={200}/>
+                    <img src={currentUser.currentUser.pfp} className={"img-thumbnail rounded-circle"} width={200} height={200}/>
 
                 </div>
                 <div className={"col-9"}>
                     <div></div>
-                    <h2>Username</h2>User1
-                    <h2>Email</h2>TestEmail
-                    <h2>Phone</h2>TestPhone
+                    <h2>Username:</h2><h3>{currentUser.currentUser.username}</h3>
+                    <h2>Joined on:</h2><h3>{currentUser.currentUser.createdOn}</h3>
 
                 </div>
             </div>
             <button className={"btn btn-primary"}>Edit</button>
-
+            <div className={"pt-2"}><button className={"btn btn-primary"}>Logout</button></div>
             <hr/>
 
             <h2>Followers</h2>
