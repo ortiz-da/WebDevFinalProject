@@ -25,7 +25,13 @@ const SearchPage = () => {
             setResults(results)
         }
 
-        getResults()
+        // https://stackoverflow.com/questions/5113374/javascript-check-if-variable-exists-is-defined-initialized
+        if(typeof query !== 'undefined') {
+
+            console.log("getting")
+            getResults()
+        }
+
     },[query])
 
 
@@ -44,6 +50,7 @@ const SearchPage = () => {
         <>
             <Navigation/>
             <h1>Search</h1>
+
             <div className={"row"}>
                 <div className={"col-6"}>
                     <div className={"input-group"}>
