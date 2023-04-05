@@ -7,12 +7,12 @@ import {useSelector} from "react-redux";
 const Navigation = () => {
     const pathName = useLocation().pathname;
 
-    const currentUser = useSelector(state => state.usersData)
+    const usersData = useSelector(state => state.usersData)
 
     return (
         <nav className={"navbar-dark py-3"}>
             <Link className={"nav-link"} to={"/profile"}><img
-                src={currentUser.currentUser.pfp}
+                src={usersData.currentUser.pfp}
                 className={"img-thumbnail rounded-circle float-end"} width={55} height={55}/></Link>
 
                 <ul className={"nav nav-pills "}>

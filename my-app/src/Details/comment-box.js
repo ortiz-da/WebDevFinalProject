@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import React, {useState} from "react";
 import {createCommentThunk} from "../Thunks/comments-thunks";
 
@@ -7,13 +7,11 @@ const CommentBox = () => {
 
     let [commentText, setCommentText] = useState('');
     const dispatch = useDispatch();
+    const usersData = useSelector(state => state.usersData)
 
-    const currentUser = {
-        "username": "NASA",
-    };
 
     const templateComment = {
-        ...currentUser,
+        ...usersData.currentUser,
         "time": "2h",
         "liked": false,
         "replies": 0,

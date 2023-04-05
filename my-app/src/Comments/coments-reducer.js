@@ -1,10 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {findCommentsThunk} from "../Services/comments-thunsk";
+import {useSelector} from "react-redux";
 
 const initialState = {
     comments: [],
     loading: false
 }
+
+
+const usersData = useSelector(state => state.usersData)
 
 
 const currentUser = {
@@ -14,7 +18,7 @@ const currentUser = {
 };
 
 const templateComment = {
-    ...currentUser,
+    ...usersData.currentUser,
     "time": "2h",
     "liked": false,
     "replies": 0,
@@ -30,12 +34,12 @@ const commentsSlice = createSlice({
         [findCommentsThunk.pending]:
             (state) => {
                 state.loading = true
-                state.tuits = []
+                state.comments = []
             },
         [findCommentsThunk.fulfilled]:
             (state, {payload}) => {
                 state.loading = false
-                state.tuits = payload
+                state.comments = payload
             },
         [findCommentsThunk.rejected]:
             (state, action) => {
@@ -51,4 +55,4 @@ export default commentsSlice.reducer
 
 export const {
     createTuit, deleteTuit, updateTuit
-} = tuitsSlice.actions
+} = commentsSlice.actions
