@@ -10,19 +10,20 @@ const API_BASE = "https://rawg-video-games-database.p.rapidapi.com";
 
 export const getGameDetails = async (gameId) => {
 
-    const url = `${API_BASE}/games/${gameId}?key=${API_KEY}`
-    const options = {
-        method: 'GET',
-        url: url,
-        headers: {
-            'X-RapidAPI-Key': '4c5b571b7fmsh75dc2034850b961p12303cjsn2f04f8883818',
-            'X-RapidAPI-Host': 'rawg-video-games-database.p.rapidapi.com'
-        }
-    };
-    const response = await axios.request(options)
-    const details = response.data
-
-    return details
+    // const url = `${API_BASE}/games/${gameId}?key=${API_KEY}`
+    // const options = {
+    //     method: 'GET',
+    //     url: url,
+    //     headers: {
+    //         'X-RapidAPI-Key': '4c5b571b7fmsh75dc2034850b961p12303cjsn2f04f8883818',
+    //         'X-RapidAPI-Host': 'rawg-video-games-database.p.rapidapi.com'
+    //     }
+    // };
+    // const response = await axios.request(options)
+    // const details = response.data
+    //
+    // return details
+    return []
 
 }
 
@@ -39,4 +40,6 @@ export const searchGames = async (searchText) => {
     };
 
     return (await axios.request(options)).data.results;
+    // return []
+
 }

@@ -7,15 +7,15 @@ const CommentBox = () => {
 
     let [commentText, setCommentText] = useState('');
     const dispatch = useDispatch();
-    const usersData = useSelector(state => state.usersData)
+    const userData = useSelector(state => state.userData)
 
 
     const templateComment = {
-        ...usersData.currentUser,
         "time": "2h",
         "liked": false,
         "replies": 0,
         "likes": 0,
+        "userID": userData.currentUser._id
     }
 
     const newComment = {
@@ -31,11 +31,11 @@ const CommentBox = () => {
             <div className={"row"}>
                 <div className={"col-1"}>
                     <Link className={"nav-link"} to={"/profile"}><img
-                        src={"https://www.georgiaaquarium.org/wp-content/uploads/2018/09/beluga-whale-webcam-9.jpg"}
+                        src={userData.pfp}
                         className={"img-thumbnail rounded-circle float-end"} width={55} height={55}/></Link>
                 </div>
                 <div className={"col-11"}>
-                    <div className={"my-1"}>Username</div>
+                    <div className={"my-1"}>{userData.username}</div>
                     <textarea value={commentText}
                               className={"form-control rounded"}
                               onChange={(event) => setCommentText(event.target.value)}>

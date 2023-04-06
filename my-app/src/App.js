@@ -18,7 +18,7 @@ import RegisterPage from "./Register";
 const store = configureStore({
         reducer: {
             commentsData: commentReducer,
-            usersData: userReducer,
+            userData: userReducer,
             // userData: userReducer
         }
     }

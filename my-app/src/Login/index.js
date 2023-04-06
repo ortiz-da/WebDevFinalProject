@@ -3,6 +3,8 @@ import Navigation from "../Navigation";
 import * as userService from "../Services/user-service"
 import {useNavigate, useNavigation} from "react-router-dom";
 import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {loginThunk} from "../Thunks/user-thunks";
 // using code from: https://github.com/jannunzi/tuiter-react-web-app-cs4550-sp23/
 
 const LoginPage = () => {
@@ -14,9 +16,16 @@ const LoginPage = () => {
     })
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const login = async () => {
-        await userService.login(user);
-        navigate("/profile")
+        dispatch(loginThunk(user)).then(e => {
+            if(typeof e.payload !== "undefined") {
+                navigate("/profile")
+
+            }
+        })
+        // navigate("/profile")
     }
 
     return (

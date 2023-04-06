@@ -8,24 +8,6 @@ const initialState = {
 }
 
 
-const usersData = useSelector(state => state.usersData)
-
-
-const currentUser = {
-    "userName": "NASA",
-    "handle": "@nasa",
-    "image": "nasa.png",
-};
-
-const templateComment = {
-    ...usersData.currentUser,
-    "time": "2h",
-    "liked": false,
-    "replies": 0,
-    "likes": 0,
-    "text": ""
-}
-
 
 const commentsSlice = createSlice({
     name: "comments",

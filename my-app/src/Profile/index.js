@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 const ProfilePage = () => {
 
 
-    const currentUser = useSelector(state => state.usersData)
+    const currentUser = useSelector(state => state.userData)
 
 
     return(

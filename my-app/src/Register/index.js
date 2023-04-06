@@ -28,8 +28,12 @@ const RegisterPage = () => {
         dispatch(registerThunk({
             ...user,
              role: checkBox.checked ? "admin" : "normal"
-        }))
-        navigate("/profile")
+        })).then(e => {
+            if(typeof e.payload !== "undefined") {
+                navigate("/profile")
+
+            }
+        })
     }
 
     return (
