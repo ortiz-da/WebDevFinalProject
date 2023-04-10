@@ -1,26 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 import Navigation from "../Navigation";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {profileThunk} from "../Thunks/user-thunks";
+import {useParams} from "react-router-dom";
 
 const ProfilePage = () => {
 
 
-    const currentUser = useSelector(state => state.userData)
-
+    const {username} = useParams();
+    const userData = useSelector(state => state.userData)
+    const dispatch = useDispatch();
 
     return(
         <>
             <Navigation/>
-            <h1>ProfilePage</h1>
+            <h1>ProfilePage{username}</h1>
             <div className={"row"}>
                 <div className={"col-3"}>
-                    <img src={currentUser.currentUser.pfp} className={"img-thumbnail rounded-circle"} width={200} height={200}/>
+                    <img src={userData.currentUser.pfp} className={"img-thumbnail rounded-circle"} width={200} height={200}/>
 
                 </div>
                 <div className={"col-9"}>
                     <div></div>
-                    <h2>Username:</h2><h3>{currentUser.currentUser.username}</h3>
-                    <h2>Joined on:</h2><h3>{currentUser.currentUser.createdOn}</h3>
+                    <h2>Username:</h2><h3>{userData.currentUser.username}</h3>
+                    <h2>Joined on:</h2><h3>{userData.currentUser.createdOn}</h3>
 
                 </div>
             </div>

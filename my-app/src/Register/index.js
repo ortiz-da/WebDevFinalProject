@@ -24,16 +24,18 @@ const RegisterPage = () => {
 
         const checkBox = document.getElementById("admin-check");
 
-        // await userService.register(user);
-        dispatch(registerThunk({
-            ...user,
-             role: checkBox.checked ? "admin" : "normal"
-        })).then(e => {
-            if(typeof e.payload !== "undefined") {
-                navigate("/profile")
 
-            }
-        })
+        try {
+            dispatch(registerThunk({
+                ...user,
+                role: checkBox.checked ? "admin" : "normal"
+            }))
+            navigate("/profile")
+
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
 
     return (

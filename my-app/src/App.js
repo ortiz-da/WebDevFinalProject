@@ -13,6 +13,7 @@ import commentReducer from "./Reducers/comment-reducer";
 import {Provider} from "react-redux";
 import userReducer from "./Reducers/user-reducer";
 import RegisterPage from "./Register";
+import CurrentUserContext from "./Reducers/current-user-context";
 
 
 const store = configureStore({
@@ -29,22 +30,26 @@ function App() {
 
     return (
         <Provider store={store}>
-            <div className={"container"}>
-                <BrowserRouter>
+            <CurrentUserContext>
+                <div className={"container"}>
+                    <BrowserRouter>
 
-                    <Routes>
-                        <Route index element={<HomePage/>}></Route>
-                        <Route path={"/details/:gameId"} element={<DetailsPage/>}></Route>
-                        <Route path={"/login"} element={<LoginPage/>}></Route>
-                        <Route path={"/profile"} element={<ProfilePage/>}></Route>
-                        <Route path={"/search/"} element={<SearchPage/>}></Route>
-                        <Route path={"/search/:query"} element={<SearchPage/>}></Route>
-                        <Route path={"/register"} element={<RegisterPage/>}></Route>
+                        <Routes>
+                            <Route index element={<HomePage/>}></Route>
+                            <Route path={"/details/:gameId"} element={<DetailsPage/>}></Route>
+                            <Route path={"/login"} element={<LoginPage/>}></Route>
+                            <Route path={"/profile"} element={<ProfilePage/>}></Route>
+                            <Route path={"/profile/:username"} element={<ProfilePage/>}></Route>
+
+                            <Route path={"/search/"} element={<SearchPage/>}></Route>
+                            <Route path={"/search/:query"} element={<SearchPage/>}></Route>
+                            <Route path={"/register"} element={<RegisterPage/>}></Route>
 
 
-                    </Routes>
-                </BrowserRouter>
-            </div>
+                        </Routes>
+                    </BrowserRouter>
+                </div>
+            </CurrentUserContext>
         </Provider>
     );
 }

@@ -1,52 +1,44 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
-    findAllUsersThunk,
-    createUserThunk,
-    updateUserThunk,
-    deleteUserThunk,
     loginThunk,
     logoutThunk,
-    findUserByIdThunk,
     registerThunk,
     profileThunk
 } from "../Thunks/user-thunks";
 
 const initialState = {
-    currentUser: {},
-    loading: false
-
+    currentUser: null,
 }
 
-const usersSlice = createSlice({
-    name: 'users',
+const userSlice = createSlice({
+    name: 'user',
     initialState,
     extraReducers: {
         [loginThunk.fulfilled]:
-            (state, {payload}) => {
-                state.loading = false
-                state.currentUser = payload
+            (state, action) => {
+                state.currentUser = action.payload
             },
         [loginThunk.rejected]:
-            (state, {payload}) => {
-                state.loading = false
-                state.currentUser = {}
+            (state, action) => {
+                state.currentUser = null
             },
 
         [loginThunk.rejected]:
-            (state, {payload}) => {
-                state.loading = false
-                state.currentUser = {}
+            (state, action) => {
+                state.currentUser = null
             },
 
         [logoutThunk.fulfilled]:
-            (state, {payload}) => {
-                state.loading = false
-                state.currentUser = {}
+            (state, action) => {
+                state.currentUser = null
             },
         [registerThunk.fulfilled]:
-            (state, {payload}) => {
-                state.loading = false
-                state.currentUser = payload
+            (state, action) => {
+                state.currentUser = action.payload;
+            },
+        [profileThunk.fulfilled]:
+            (state, action) => {
+                state.currentUser = action.payload;
             },
 
     },
@@ -54,4 +46,4 @@ const usersSlice = createSlice({
 });
 
 
-export default usersSlice.reducer;
+export default userSlice.reducer;

@@ -14,17 +14,34 @@ import {
     profile
 } from "../Services/user-service.js";
 
+
+// Thunks are just a passthrough
+export const loginThunk = createAsyncThunk(
+    'users/login', async (user) => await service.login(user)
+)
+
+export const logoutThunk = createAsyncThunk(
+    'users/logout', async () => await service.logout()
+)
+
+export const registerThunk = createAsyncThunk(
+    'users/register',
+    async (user) => await service.register(user))
+
+export const profileThunk = createAsyncThunk(
+    'users/profile', async () => await service.profile()
+)
+
 export const findAllUsersThunk = createAsyncThunk(
     'users/findUsers', async () =>
         await service.findAllUsers()
 )
 
 export const createUserThunk = createAsyncThunk(
-    'users/createUser', async (user) => {
-        const newUser = await service.createUser(user)
-        return newUser
-    }
+    'users/createUser', async (user) => await service.createUser(user)
 )
+
+// May be used in the future
 
 export const updateUserThunk =
     createAsyncThunk(
@@ -42,33 +59,10 @@ export const deleteUserThunk = createAsyncThunk(
         return userId
     })
 
-export const loginThunk = createAsyncThunk(
-    'users/login', async (user) => {
-        await service.login(user)
-        return user;
-    }
-)
-
-export const logoutThunk = createAsyncThunk(
-    'users/logout', async () => {
-        await service.logout()
-    }
-)
-
 export const findUserByIdThunk = createAsyncThunk(
     'users/findUserById', async () =>
         await service.findAllUsers()
 )
 
-export const registerThunk = createAsyncThunk(
-    'users/register',
-    async (user) => {
-        const registeredUser = await service.register(user)
-        return registeredUser
-    })
 
-export const profileThunk = createAsyncThunk(
-    'users/profile', async () =>
-        await service.profile()
-)
 

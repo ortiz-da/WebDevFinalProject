@@ -19,12 +19,14 @@ const LoginPage = () => {
     const dispatch = useDispatch();
 
     const login = async () => {
-        dispatch(loginThunk(user)).then(e => {
-            if(typeof e.payload !== "undefined") {
-                navigate("/profile")
+        try {
+            await dispatch(loginThunk(user))
+            navigate("/profile")
 
-            }
-        })
+        }
+        catch (e) {
+            console.log(e)
+        }
         // navigate("/profile")
     }
 

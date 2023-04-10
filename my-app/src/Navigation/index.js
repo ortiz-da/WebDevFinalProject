@@ -8,22 +8,21 @@ import {getGameDetails} from "../Services/game-service";
 const Navigation = () => {
     const pathName = useLocation().pathname;
 
-    const userData = useSelector(state => state.userData)
-
-    const [loggedIn, setLoggedIn] = useState(false);
+     const userData = useSelector(state => state.userData)
 
     return (
         <div>
-            <h1>{JSON.stringify(userData.currentUser)}</h1>
+            <h1>{JSON.stringify(userData)}</h1>
+            {userData.currentUser && <h1>Someone is logged in</h1>}
             <nav className={"navbar-dark py-3"}>
-                {loggedIn ?
+                {userData.currentUser ?
                     <Link className={"nav-link"} to={"/profile"}>
                         <img src={userData.currentUser.pfp} className={"img-thumbnail rounded-circle float-end"} width={55}
                              height={55}/>
                     </Link>
                     :
                     <Link className={"nav-link"} to={"/login"}>
-                        <div src={userData.currentUser.pfp} className={" rounded-circle float-end"} width={55}
+                        <div  className={" rounded-circle float-end"} width={55}
                              height={55}>LOGIN
                         </div>
                     </Link>
