@@ -12,8 +12,7 @@ const Navigation = () => {
 
     return (
         <div>
-            <h1>{JSON.stringify(userData)}</h1>
-            {userData.currentUser && <h1>Someone is logged in</h1>}
+            <p>{JSON.stringify(userData)}</p>
             <nav className={"navbar-dark py-3"}>
                 {userData.currentUser ?
                     <Link className={"nav-link"} to={"/profile"}>
@@ -41,10 +40,7 @@ const Navigation = () => {
                                                      to={"/"}>Home</Link></li>
                     {/*<li className={"nav-item"}><Link className={`nav-link ${pathName === "/details" ? "active" : ""}`}*/}
                     {/*                                 to={"/details"}>Details</Link></li>*/}
-                    <li className={"nav-item"}><Link className={`nav-link ${pathName === "/login" ? "active" : ""}`}
-                                                     to={"/login"}>Login</Link></li>
-                    <li className={"nav-item"}><Link className={`nav-link ${pathName === "/profile" ? "active" : ""}`}
-                                                     to={"/profile"}>Profile</Link></li>
+
                     <li className={"nav-item"}><Link
                         className={`nav-link ${(pathName.includes("/search") || pathName.includes("/results") || pathName.includes("/details")) ? "active" : ""}`}
                         to={"/search"}>Search</Link></li>

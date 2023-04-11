@@ -5,6 +5,7 @@ import {useNavigate, useNavigation} from "react-router-dom";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {loginThunk} from "../Thunks/user-thunks";
+import {unwrapResult} from "@reduxjs/toolkit";
 // using code from: https://github.com/jannunzi/tuiter-react-web-app-cs4550-sp23/
 
 const LoginPage = () => {
@@ -18,16 +19,17 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    //USING CODE FROM: https://stackoverflow.com/questions/64517547/redux-thunk-caller-get-response
     const login = async () => {
-        try {
-            await dispatch(loginThunk(user))
-            navigate("/profile")
+        const result = await dispatch(loginThunk(user))
 
+        try {
+            const payload = unwrapResult(result)
+            navigate("/profile")
         }
         catch (e) {
             console.log(e)
         }
-        // navigate("/profile")
     }
 
     return (

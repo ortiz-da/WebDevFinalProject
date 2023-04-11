@@ -4,7 +4,8 @@ import * as userService from "../Services/user-service"
 import {useNavigate, useNavigation} from "react-router-dom";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {registerThunk} from "../Thunks/user-thunks";
+import {loginThunk, registerThunk} from "../Thunks/user-thunks";
+import {unwrapResult} from "@reduxjs/toolkit";
 // using code from: https://github.com/jannunzi/tuiter-react-web-app-cs4550-sp23/
 // https://www.w3schools.com/howto/howto_js_display_checkbox_text.asp
 const RegisterPage = () => {
@@ -20,20 +21,15 @@ const RegisterPage = () => {
 
 
     const navigate = useNavigate();
+
+    //USING CODE FROM: https://stackoverflow.com/questions/64517547/redux-thunk-caller-get-response
     const register = async () => {
-
-        const checkBox = document.getElementById("admin-check");
-
+        const result = await dispatch(registerThunk(user))
 
         try {
-            dispatch(registerThunk({
-                ...user,
-                role: checkBox.checked ? "admin" : "normal"
-            }))
+            const payload = unwrapResult(result)
             navigate("/profile")
-
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e)
         }
     }
@@ -60,6 +56,15 @@ const RegisterPage = () => {
                                                                  onChange={(e) => setUser({
                                                                      ...user,
                                                                      password: e.target.value
+                                                                 })}></input></div>
+
+                    <label htmlFor={"pfp"}>Profile Picture URL</label>
+                    <div id="pfp" className={"my-2"}><input type={"text"} placeholder={"Profile Picture URL"}
+                                                                 value={user.pfp}
+
+                                                                 onChange={(e) => setUser({
+                                                                     ...user,
+                                                                     pfp: e.target.value
                                                                  })}></input></div>
                     <div>
                         <label htmlFor={"admin-check"}>Admin</label>
