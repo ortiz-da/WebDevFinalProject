@@ -44,7 +44,7 @@ const DetailsPage = () => {
         fetchDetails()
 
 
-    },[])
+    },[currentUser])
 
 
     let navigate = useNavigate();
