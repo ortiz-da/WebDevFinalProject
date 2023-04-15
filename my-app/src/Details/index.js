@@ -1,42 +1,98 @@
 import React, {useEffect, useState} from "react";
 import Navigation from "../Navigation";
 import {useNavigate, useParams} from "react-router-dom";
-import {getGameDetails} from "../Services/game-service";
+import {getGameDetails, likeGame, getGameLikesById, unlikeGame} from "../Services/game-service";
 import CommentBox from "./comment-box";
 import CommentList from "../Comments/comments-list";
+import {useSelector} from "react-redux";
 
 const DetailsPage = () => {
+
+    const {currentUser} = useSelector(state => state.userData)
+
 
     let {gameId} = useParams()
 
     const [details, setDetails] = useState({});
 
-    useEffect( () => {
+    const [likeCount, setLikeCount] = useState(0);
 
-        const getDetails = async () => {
-            const details = await getGameDetails(gameId)
-            // console.log(details)
-            setDetails(details)
+    const [hasLiked, setHasLiked] = useState(false)
+
+
+    const fetchDetails = async () => {
+        const details = await getGameDetails(gameId)
+        // console.log(details)
+        setDetails(details)
+    }
+
+    const fetchLikes = async () => {
+        const gameLikes = await getGameLikesById(gameId)
+        for (let i = 0; i < gameLikes.length; i++) {
+            if(gameLikes[i].userId === currentUser._id) {
+                console.log("ALREADY LIKED BY CURRENT USER");
+                setHasLiked(true)
+            }
         }
+        setLikeCount(gameLikes.length)
+    }
 
-        getDetails()
+    useEffect( () => {
+        console.log(currentUser)
+        fetchLikes()
+
+        fetchDetails()
+
+
     },[])
 
 
     let navigate = useNavigate();
 
+    const handleLikeButton = () => {
+        if(!hasLiked) {
+            console.log("liking game")
+            likeGame({ name: details.name, gameId: gameId});
+            setHasLiked(true)
+            setLikeCount(likeCount+1)
+        }
+        else {
+            console.log("unliking game")
+            unlikeGame({ name: details.name, gameId: gameId})
+            setHasLiked(false)
+            setLikeCount(likeCount-1)
+        }
+
+    }
+
 
     return(
         <>
             <Navigation/>
+
             <button className={"btn btn-primary"} onClick={() => navigate(-1)}>Back</button>
 
             <h1>Details</h1>
+            {hasLiked.toString()}
+
 
             <div className={"position-relative mb-2"}>
 
                 <img className={"img-fluid"} src={details.background_image}/>
-                <div className={"position-absolute start-0 bottom-0 text-light m-2 fs-2 fw-bold"}><i className={"far fa-heart"}></i> {details.name}</div>
+                {
+                    currentUser && (
+                        <div
+                            onClick={handleLikeButton}
+                            className={"position-absolute start-0 bottom-0 text-light m-2 fs-2 fw-bold"}>
+                            {/*from tuiter*/}
+                            {hasLiked ?
+                                <i className={"fas fa-heart"} style={{color: "red"}}></i> :
+                                <i className={"far fa-heart"}></i>}
+                            {likeCount} - {details.name}
+                        </div>
+                    )
+                }
+
             </div>
             <h2>About</h2>
 
@@ -77,8 +133,8 @@ const DetailsPage = () => {
 
 
             <h2>Discussion</h2>
-            <CommentBox/>
-            <CommentList/>
+            {/*<CommentBox/>*/}
+            {/*<CommentList/>*/}
 
         </>
     )

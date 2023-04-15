@@ -13,6 +13,8 @@ const ProfilePage = () => {
     const {username} = useParams();
     const currentUser = useSelector(state => state.userData)
     const [profile, setProfile] = useState({})
+
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const logout = async () => {
@@ -26,6 +28,7 @@ const ProfilePage = () => {
         const action = await dispatch(profileThunk());
         setProfile(action.payload);
     };
+
 
     // const getUserByUsername = async () => {
     //     const user = await userService.findUserByUsername(username);
