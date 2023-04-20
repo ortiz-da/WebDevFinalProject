@@ -31,4 +31,8 @@ export const updateCommentThunk =
         }
     )
 
+export const findCommentsByGameIdThunk = createAsyncThunk(
+    'comments/findCommentsByGameId', async (gameId) =>
+        await service.findCommentsByGameId(gameId)
+)
 

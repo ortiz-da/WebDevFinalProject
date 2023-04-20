@@ -11,7 +11,7 @@ const CommentItem = ({post}) => {
     useEffect( () => {
 
         const getCommentUserInfo = async () => {
-            const info = await findUserById(post.userID)
+            const info = await findUserById(post.userId)
             // console.log(details)
             setUserInfo(info)
         }
@@ -35,7 +35,7 @@ const CommentItem = ({post}) => {
                     </div>
                     <div className="text-secondary fw-normal">{post.commentText}</div>
                     <div className={"pt-3"}>
-                        <CommentStats post={post}></CommentStats>
+                        {/*<CommentStats post={post}></CommentStats>*/}
                     </div>
                 </div>
             </div>

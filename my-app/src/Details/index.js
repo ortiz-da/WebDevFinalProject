@@ -139,7 +139,7 @@ const DetailsPage = () => {
 
             <h2>Discussion</h2>
             <CommentBox gameDetails={details}/>
-            {/*<CommentList/>*/}
+            <CommentList gameId={gameId}/>
 
         </>
     )

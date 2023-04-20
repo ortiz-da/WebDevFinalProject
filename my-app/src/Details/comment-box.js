@@ -12,7 +12,7 @@ const CommentBox = ({gameDetails}) => {
     let {gameId} = useParams()
 
 
-    const postButtonHandler = () => {
+    const postButtonHandler = async () => {
 
         const newComment = {
             commentText: commentText,
@@ -21,7 +21,8 @@ const CommentBox = ({gameDetails}) => {
             "gameName": gameDetails.name,
         }
 
-        dispatch(createCommentThunk(newComment))
+        await dispatch(createCommentThunk(newComment))
+        setCommentText("")
     }
 
     return (

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {findCommentsByGameIdThunk} from "../Thunks/comments-thunks";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 const COMMENTS_API = `${API_BASE}/comments`;
@@ -27,4 +28,10 @@ export const updateComment = async (comment) => {
         .put(`${COMMENTS_API}/${comment._id}`, comment);
 
     return comment;
+}
+
+export const findCommentsByGameId = async (gameId) => {
+    const response = await api.get(`${COMMENTS_API}/game/${gameId}`);
+    const comments = response.data;
+    return comments;
 }
