@@ -22,11 +22,12 @@ const DetailsPage = () => {
 
     const fetchDetails = async () => {
         const details = await getGameDetails(gameId)
-        // console.log(details)
+        console.log("FETCHING DETAILS")
         setDetails(details)
     }
 
     const fetchLikes = async () => {
+        console.log("FETCHING LIKES")
         const gameLikes = await getGameLikesById(gameId)
         for (let i = 0; i < gameLikes.length; i++) {
             if(gameLikes[i].userId === currentUser._id) {
@@ -38,13 +39,15 @@ const DetailsPage = () => {
     }
 
     useEffect( () => {
-        console.log(currentUser)
+
         fetchLikes()
 
-        fetchDetails()
-
-
     },[currentUser])
+
+    useEffect(() => {
+
+        fetchDetails()
+    },[])
 
 
     let navigate = useNavigate();
