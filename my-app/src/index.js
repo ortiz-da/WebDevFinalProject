@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.css";
-import 'bootswatch/dist/pulse/bootstrap.min.css'; // Added this :boom:
+import 'bootswatch/dist/cyborg/bootstrap.min.css'; // Added this :boom:
 import '@fortawesome/fontawesome-free/css/all.min.css'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -83,12 +83,15 @@ const DetailsPage = () => {
                     currentUser && (
                         <div
                             onClick={handleLikeButton}
-                            className={"position-absolute start-0 bottom-0 text-light m-2 fs-2 fw-bold"}>
+                            className={"position-absolute start-0 bottom-0 text-light m-2 fs-2 fw-bold bg-white bg-gradient mx-0 rounded-end"}>
                             {/*from tuiter*/}
-                            {hasLiked ?
-                                <i className={"fas fa-heart"} style={{color: "red"}}></i> :
-                                <i className={"far fa-heart"}></i>}
-                            {likeCount} - {details.name}
+                            <div className={"mx-3 "}>
+                                {hasLiked ?
+                                    <i className={"fas fa-heart"} style={{color: "red"}}></i> :
+                                    <i className={"far fa-heart"}></i>}
+                                {likeCount} - {details.name}
+                            </div>
+
                         </div>
                     )
                 }
