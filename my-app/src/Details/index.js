@@ -106,23 +106,23 @@ const DetailsPage = () => {
 
             <div className={"container"}>
                 <div className={"row"}>
-                    <div className={"col-2 border-primary"}>
-                        <div className={"row border-top border-bottom border-primary border-end fw-bolder"}>Website</div>
-                        <div className={"row border-bottom border-primary border-end fw-bolder"}>Release Date</div>
-                        <div className={"row border-bottom border-primary border-end fw-bolder"}>Metacritic Rating</div>
-                        <div className={"row border-bottom border-primary border-end fw-bolder"}>Subreddit</div>
+                    <div className={"col-3 border-primary"}>
+                        <div className={"row border-top border-bottom border-primary border-end fw-bolder px-3"}>Website</div>
+                        <div className={"row border-bottom border-primary border-end fw-bolder px-3"}>Release Date</div>
+                        <div className={"row border-bottom border-primary border-end fw-bolder px-3"}>Metacritic Rating</div>
+                        <div className={"row border-bottom border-primary border-end fw-bolder px-3"}>Subreddit</div>
                     </div>
                     <div className={"col"}>
-                        <div className={"row border-top border-bottom border-primary"}>
+                        <div className={"row border-top border-bottom border-primary px-3"}>
                             {
                                 details.website === "" ? "N/A":
                                     <a className={"p-0"} href={details.website}>{details.website}</a>
                             }
 
                         </div>
-                        <div className={"row border-bottom border-primary "}>{details.released === "" ? "N/A" : details.released}</div>
-                        <div className={"row border-bottom border-primary "}>{details.metacritic === null ? "N/A" : details.metacritic}</div>
-                        <div className={"row border-bottom border-primary"}>
+                        <div className={"row border-bottom border-primary px-3"}>{details.released === "" ? "N/A" : details.released}</div>
+                        <div className={"row border-bottom border-primary px-3"}>{details.metacritic === null ? "N/A" : details.metacritic}</div>
+                        <div className={"row border-bottom border-primary px-3"}>
                             {
                                 details.reddit_url === "" ? "N/A":
                                     <a className={"p-0"} href={details.reddit_url}>

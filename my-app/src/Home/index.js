@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import {Link} from "react-router-dom";
+import CommentItem from "../Comments/comment-item";
+import CommentsList from "../Comments/comments-list";
 {/*SLIDER CODE FROM: https://www.npmjs.com/package/react-animated-slider*/}
 
 
@@ -27,11 +29,7 @@ const slides = [
 
 
 const HomePage = () => {
-    const dispatch = useDispatch();
 
-
-    const {comments} = useSelector(
-        state => state.commentsData)
 
 
     return (
@@ -68,11 +66,7 @@ const HomePage = () => {
             <h2>Latest Post</h2>
             <h2>Newest User</h2>
 
-            <ul>
-                {
-                    comments.map(comment => <li key={comment._id}>post</li>)
-                }
-            </ul>
+            <CommentsList newestComments={true}></CommentsList>
         </div>
     )
 }

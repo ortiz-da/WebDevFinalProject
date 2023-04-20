@@ -3,9 +3,9 @@ import {createAsyncThunk}
 import * as service
     from "../Services/comments-service"
 
-export const findCommentsThunk = createAsyncThunk(
+export const findAllCommentsThunk = createAsyncThunk(
     'comments/findComments', async () =>
-        await service.findComments()
+        await service.findAllComments()
 )
 
 export const deleteCommentThunk = createAsyncThunk(

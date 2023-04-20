@@ -12,7 +12,8 @@ export const createComment = async (comment) => {
     const response = await api.post(COMMENTS_API, comment)
     return response.data;
 }
-export const findComments  = async ()     => {
+export const findAllComments  = async ()     => {
+    console.log("calling find all comments")
     const response = await api.get(COMMENTS_API);
     const comments = response.data;
     return comments;
