@@ -43,7 +43,7 @@ const ProfilePage = () => {
         }
         // getProfile();
 
-    }, []);
+    }, [profileId]);
 
     return(
         <>
