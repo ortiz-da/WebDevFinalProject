@@ -49,18 +49,17 @@ const DetailsPage = () => {
 
     let navigate = useNavigate();
 
-    const handleLikeButton = () => {
-        if(!hasLiked) {
+    const handleLikeButton = async () => {
+        if (!hasLiked) {
             console.log("liking game")
-            likeGame({ name: details.name, gameId: gameId});
+            await likeGame({name: details.name, gameId: gameId});
             setHasLiked(true)
-            setLikeCount(likeCount+1)
-        }
-        else {
+            setLikeCount(likeCount + 1)
+        } else {
             console.log("unliking game")
-            unlikeGame({ name: details.name, gameId: gameId})
+            await unlikeGame({name: details.name, gameId: gameId})
             setHasLiked(false)
-            setLikeCount(likeCount-1)
+            setLikeCount(likeCount - 1)
         }
 
     }
