@@ -39,7 +39,7 @@ function App() {
                             <Route path={"/details/:gameId"} element={<DetailsPage/>}></Route>
                             <Route path={"/login"} element={<LoginPage/>}></Route>
                             <Route path={"/profile"} element={<ProfilePage/>}></Route>
-                            <Route path={"/profile/:username"} element={<ProfilePage/>}></Route>
+                            <Route path={"/profile/:profileId"} element={<ProfilePage/>}></Route>
 
                             <Route path={"/search/"} element={<SearchPage/>}></Route>
                             <Route path={"/search/:query"} element={<SearchPage/>}></Route>

@@ -10,7 +10,7 @@ import {useNavigate, useParams} from "react-router-dom";
 
 const ProfilePage = () => {
 
-    const {username} = useParams();
+    const {profileId} = useParams();
     const currentUser = useSelector(state => state.userData)
     const [profile, setProfile] = useState({})
 
@@ -30,25 +30,25 @@ const ProfilePage = () => {
     };
 
 
-    // const getUserByUsername = async () => {
-    //     const user = await userService.findUserByUsername(username);
-    //     setProfile(user);
-    // };
+    const getUserById = async () => {
+        const user = await userService.findUserById(profileId);
+        setProfile(user);
+    };
 
     useEffect(() => {
-        // if (username) {
-        //     getUserByUsername();
-        // } else {
-        //     getProfile();
-        // }
-        getProfile();
+        if (profileId) {
+            getUserById();
+        } else {
+            getProfile();
+        }
+        // getProfile();
 
     }, []);
 
     return(
         <>
             <Navigation/>
-            <h1>ProfilePage{username}</h1>
+            <h1>ProfilePage{profileId}</h1>
             {profile &&             <div>
                 <div className={"row"}>
                     <div className={"col-3"}>

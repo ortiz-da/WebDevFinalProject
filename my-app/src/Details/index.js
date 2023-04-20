@@ -53,17 +53,24 @@ const DetailsPage = () => {
     let navigate = useNavigate();
 
     const handleLikeButton = async () => {
-        if (!hasLiked) {
-            console.log("liking game")
-            await likeGame({name: details.name, gameId: gameId});
-            setHasLiked(true)
-            setLikeCount(likeCount + 1)
-        } else {
-            console.log("unliking game")
-            await unlikeGame({name: details.name, gameId: gameId})
-            setHasLiked(false)
-            setLikeCount(likeCount - 1)
+
+        if(currentUser) {
+            if (!hasLiked) {
+                console.log("liking game")
+                await likeGame({name: details.name, gameId: gameId});
+                setHasLiked(true)
+                setLikeCount(likeCount + 1)
+            } else {
+                console.log("unliking game")
+                await unlikeGame({name: details.name, gameId: gameId})
+                setHasLiked(false)
+                setLikeCount(likeCount - 1)
+            }
         }
+        else {
+            navigate("/login")
+        }
+
 
     }
 
@@ -75,14 +82,12 @@ const DetailsPage = () => {
             <button className={"btn btn-primary"} onClick={() => navigate(-1)}>Back</button>
 
             <h1>Details</h1>
-            {hasLiked.toString()}
-
 
             <div className={"position-relative mb-2"}>
 
                 <img className={"img-fluid"} src={details.background_image}/>
                 {
-                    currentUser && (
+
                         <div
                             onClick={handleLikeButton}
                             className={"position-absolute start-0 bottom-0 text-light m-2 fs-2 fw-bold bg-white bg-gradient mx-0 rounded-end"}>
@@ -95,7 +100,7 @@ const DetailsPage = () => {
                             </div>
 
                         </div>
-                    )
+
                 }
 
             </div>
@@ -137,9 +142,13 @@ const DetailsPage = () => {
             </div>
 
 
-            <h2>Discussion</h2>
-            <CommentBox gameDetails={details}/>
-            <CommentList gameId={gameId}/>
+
+            <div className={"my-4"}>
+                <h2>Discussion</h2>
+                {currentUser && <CommentBox gameDetails={details}/>}
+                <CommentList gameId={gameId}/>
+            </div>
+
 
         </>
     )
