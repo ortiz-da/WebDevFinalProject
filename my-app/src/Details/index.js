@@ -138,7 +138,7 @@ const DetailsPage = () => {
 
 
             <h2>Discussion</h2>
-            <CommentBox/>
+            <CommentBox gameDetails={details}/>
             {/*<CommentList/>*/}
 
         </>

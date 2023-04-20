@@ -1,29 +1,24 @@
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {createCommentThunk} from "../Thunks/comments-thunks";
 
-const CommentBox = () => {
+const CommentBox = ({gameDetails}) => {
 
     let [commentText, setCommentText] = useState('');
     const dispatch = useDispatch();
     const {currentUser} = useSelector(state => state.userData)
 
+    let {gameId} = useParams()
 
 
     const postButtonHandler = () => {
 
-        const templateComment = {
-            "time": "2h",
-            "liked": false,
-            "replies": 0,
-            "likes": 0,
-            "userID": currentUser._id
-        }
-
         const newComment = {
             commentText: commentText,
-            ...templateComment
+            "gameId": gameId,
+            "userId": currentUser._id,
+            "gameName": gameDetails.name,
         }
 
         dispatch(createCommentThunk(newComment))
