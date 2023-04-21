@@ -4,7 +4,11 @@ import * as userService from "../Services/user-service";
 
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk, profileThunk, updateUserThunk} from "../Thunks/user-thunks";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import {findCommentsByUserId} from "../Services/comments-service";
+import {findCommentsByUserIdThunk} from "../Thunks/comments-thunks";
+import CommentsList from "../Comments/comments-list";
+import CommentItem from "../Comments/comment-item";
 
 // USING CODE FROM: https://github.com/jannunzi/tuiter-react-web-app-cs4550-sp23/blob/project/src/profile.js
 
@@ -15,6 +19,8 @@ const ProfilePage = () => {
     const [profile, setProfile] = useState({})
 
     const [isEditing, setIsEditing] = useState(false);
+
+    const [userComments, setUserComments] = useState([]);
 
 
     const dispatch = useDispatch();
@@ -32,6 +38,18 @@ const ProfilePage = () => {
         setProfile(action.payload);
     };
 
+    const getLikes = async () => {
+        // console.log("GETTING LIKES")
+        // const action = await dispatch()
+    }
+
+    const fetchComments = async (userId) => {
+        console.log(`GETTING COMMENTS FOR PROFILE ${userId}`)
+        const comments = await dispatch(findCommentsByUserIdThunk(userId))
+        // console.log(`__________________${comments}`)
+        setUserComments(comments.payload)
+    }
+
     const getUserById = async () => {
         const user = await userService.findUserById(profileId);
         setProfile(user);
@@ -47,10 +65,13 @@ const ProfilePage = () => {
     useEffect(() => {
         if (profileId) {
             getUserById();
+            fetchComments(profileId)
         } else {
             getProfile();
+            fetchComments(currentUser._id)
+
         }
-        // getProfile();
+
 
     }, [profileId]);
 
@@ -156,6 +177,18 @@ const ProfilePage = () => {
                 </ul>
 
                 <h2>Comments Made</h2>
+                {
+                    <ul className={"list-group"}>
+                        { userComments && (
+                            userComments && userComments.map(post =>
+                                <div>On <Link to={`/details/${post.gameId}`}>{post.gameName}</Link><CommentItem key={post._id} post={post}/> <hr></hr></div>
+
+                            )
+                        )
+
+                        }
+                    </ul>
+                }
             </div>}
 
 

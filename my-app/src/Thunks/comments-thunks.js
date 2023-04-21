@@ -36,3 +36,8 @@ export const findCommentsByGameIdThunk = createAsyncThunk(
         await service.findCommentsByGameId(gameId)
 )
 
+export const findCommentsByUserIdThunk = createAsyncThunk(
+    'comments/findCommentsByUserId', async (userId) =>
+        await service.findCommentsByUserId(userId)
+)
+

@@ -34,10 +34,6 @@ const CommentList = ({gameId, newestComments}) => {
 
     }, [comments])
 
-    const deleteCommentHandler = (id) => {
-        dispatch(deleteCommentThunk(id));
-    }
-
     return (
         <ul className={"list-group"}>
             {

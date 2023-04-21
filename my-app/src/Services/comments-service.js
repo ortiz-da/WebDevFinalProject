@@ -36,3 +36,9 @@ export const findCommentsByGameId = async (gameId) => {
     const comments = response.data;
     return comments;
 }
+
+export const findCommentsByUserId = async (userId) => {
+    const response = await api.get(`${COMMENTS_API}/user/${userId}`);
+    const comments = response.data;
+    return comments;
+}
