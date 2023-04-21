@@ -64,5 +64,12 @@ export const findUserByIdThunk = createAsyncThunk(
         await service.findAllUsers()
 )
 
+export const findLikesByUserIdThunk = createAsyncThunk(
+    'users/findLikesByUserId', async (userId) =>
+        await service.getGameLikesByUserId(userId)
+)
+
+
+
 
 

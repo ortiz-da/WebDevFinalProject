@@ -1,9 +1,11 @@
 import React, {useState, useEffect, useSyncExternalStore} from "react";
 import Navigation from "../Navigation";
-import * as userService from "../Services/user-service";
+import * as userService from "../Services/user-service.js";
+import * as gameService from "../Services/game-service.js";
+
 
 import {useDispatch, useSelector} from "react-redux";
-import {logoutThunk, profileThunk, updateUserThunk} from "../Thunks/user-thunks";
+import {findLikesByUserIdThunk, logoutThunk, profileThunk, updateUserThunk} from "../Thunks/user-thunks";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {findCommentsByUserId} from "../Services/comments-service";
 import {findCommentsByUserIdThunk} from "../Thunks/comments-thunks";
@@ -21,6 +23,7 @@ const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);
 
     const [userComments, setUserComments] = useState([]);
+    const [userLikes, setUserLikes] = useState([]);
 
 
     const dispatch = useDispatch();
@@ -38,9 +41,11 @@ const ProfilePage = () => {
         setProfile(action.payload);
     };
 
-    const getLikes = async () => {
-        // console.log("GETTING LIKES")
-        // const action = await dispatch()
+    const fetchLikes = async (userId) => {
+        console.log(`GETTING LIKES FOR PROFILE ${userId}`)
+        const likes = await dispatch(findLikesByUserIdThunk(userId))
+        // console.log(`__________________${comments}`)
+        setUserLikes(likes.payload)
     }
 
     const fetchComments = async (userId) => {
@@ -66,9 +71,11 @@ const ProfilePage = () => {
         if (profileId) {
             getUserById();
             fetchComments(profileId)
+            fetchLikes(profileId)
         } else {
             getProfile();
             fetchComments(currentUser._id)
+            fetchLikes(currentUser._id)
 
         }
 
@@ -169,20 +176,27 @@ const ProfilePage = () => {
 
                 <h2>Liked Games</h2>
                 <ul className={"list-group"}>
-                    <li className={"list-group-item"}>Test</li>
-                    <li className={"list-group-item"}>Test</li>
-                    <li className={"list-group-item"}>Test</li>
-                    <li className={"list-group-item"}>Test</li>
-                    <li className={"list-group-item"}>Test</li>
+                    {
+                        <ul className={"list-group"}>
+                            {
+                                userLikes && userLikes.map(game =>
+                                <Link to={`/details/${game.gameId}`}>{game.gameName}</Link>
+                                )
+
+                            }
+                        </ul>
+                    }
                 </ul>
 
                 <h2>Comments Made</h2>
                 {
                     <ul className={"list-group"}>
-                        { userComments && (
+                        {userComments && (
                             userComments && userComments.map(post =>
-                                <div>On <Link to={`/details/${post.gameId}`}>{post.gameName}</Link><CommentItem key={post._id} post={post}/> <hr></hr></div>
-
+                                <div>On <Link to={`/details/${post.gameId}`}>{post.gameName}</Link><CommentItem
+                                    key={post._id} post={post}/>
+                                    <hr></hr>
+                                </div>
                             )
                         )
 

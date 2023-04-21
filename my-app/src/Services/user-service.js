@@ -51,3 +51,8 @@ export const profile = async () => {
     const response = await api.get(`${USERS_REST_API_URL}/profile`);
     return response.data;
 };
+
+export const getGameLikesByUserId = async (userId) => {
+    const response = await api.get(`${USERS_REST_API_URL}/likes/${userId}`,);
+    return response.data;
+}
