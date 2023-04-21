@@ -27,6 +27,7 @@ const RegisterPage = () => {
     const register = async () => {
         const result = await dispatch(registerThunk(user))
 
+        console.log(user)
         try {
             const payload = unwrapResult(result)
             navigate("/profile")
@@ -80,7 +81,11 @@ const RegisterPage = () => {
                     <div>
                         <label htmlFor={"admin-check"}>Admin</label>
                         <input className={"d-block"} id={"admin-check"}
-                               type={"checkbox"}/>
+                               type={"checkbox"}
+                               onChange={(e) => setUser({
+                                   ...user,
+                                   role: e.target.checked ? "admin" : "normal"
+                               })}/>
                     </div>
 
                     <button className={"btn btn-primary my-2 w"} onClick={register}>Register</button>
