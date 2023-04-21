@@ -80,7 +80,7 @@ const ProfilePage = () => {
                             ) :
                             <h5>{profile.username}</h5>
                         }
-                        {!currentUser && <p>{profile.username}</p>}
+
 
                         <h2>Joined on:</h2>
                         <h5>{profile.createdOn}</h5>
