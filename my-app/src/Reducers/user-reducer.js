@@ -3,7 +3,7 @@ import {
     loginThunk,
     logoutThunk,
     registerThunk,
-    profileThunk
+    profileThunk, updateUserThunk
 } from "../Thunks/user-thunks";
 
 const initialState = {
