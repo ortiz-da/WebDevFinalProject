@@ -14,6 +14,8 @@ const ProfilePage = () => {
     const currentUser = useSelector(state => state.userData)
     const [profile, setProfile] = useState({})
 
+    const [isEditing, setIsEditing] = useState(false);
+
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -77,7 +79,7 @@ const ProfilePage = () => {
 
                     </div>
                 </div>
-                <button className={"btn btn-primary"}>Edit</button>
+                <button className={"btn btn-primary"} onClick={() => {setIsEditing(!isEditing)}}>{isEditing ? "Save" : "Edit"}</button>
                 <div className={"pt-2"}><button className={"btn btn-danger"} onClick={logout}>Logout</button></div>
                 <hr/>
 

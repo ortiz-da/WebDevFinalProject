@@ -63,8 +63,7 @@ const HomePage = () => {
                     </div>)}
             </Slider>
 
-            <h2>Latest Post</h2>
-            <h2>Newest User</h2>
+            <h2>Latest Comments</h2>
 
             <CommentsList newestComments={true}></CommentsList>
         </div>

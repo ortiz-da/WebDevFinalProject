@@ -11,6 +11,7 @@ import {unwrapResult} from "@reduxjs/toolkit";
 const RegisterPage = () => {
 
     const [user, setUser] = useState({
+        email: "test@gmail.com",
         username: "username1",
         password: "password1",
         role: "normal",
@@ -40,6 +41,16 @@ const RegisterPage = () => {
             <h1>Register</h1>
             <div className={"row"}>
                 <span className={"col-4 border rounded border-primary"}>
+
+                                        <label htmlFor={"email"}>Email</label>
+                    <div id="email" className={"my-2"}><input type={"text"} placeholder={"Email"}
+                                                              value={user.email}
+                                                              onChange={(e) => setUser({
+                                                                  ...user,
+                                                                  email: e.target.value
+                                                              })}
+                    ></input></div>
+
                     <label htmlFor={"username"}>Username</label>
                     <div id="username" className={"my-2"}><input type={"text"} placeholder={"Username"}
                                                                  value={user.username}
@@ -60,12 +71,12 @@ const RegisterPage = () => {
 
                     <label htmlFor={"pfp"}>Profile Picture URL</label>
                     <div id="pfp" className={"my-2"}><input type={"text"} placeholder={"Profile Picture URL"}
-                                                                 value={user.pfp}
+                                                            value={user.pfp}
 
-                                                                 onChange={(e) => setUser({
-                                                                     ...user,
-                                                                     pfp: e.target.value
-                                                                 })}></input></div>
+                                                            onChange={(e) => setUser({
+                                                                ...user,
+                                                                pfp: e.target.value
+                                                            })}></input></div>
                     <div>
                         <label htmlFor={"admin-check"}>Admin</label>
                         <input className={"d-block"} id={"admin-check"}
