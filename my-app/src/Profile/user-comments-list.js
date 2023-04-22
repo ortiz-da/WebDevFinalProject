@@ -45,7 +45,7 @@ const UserCommentsList = ({userId}) => {
                             <div>
                                 On <Link to={`/details/${post.gameId}`}>{post.gameName}</Link><CommentItem key={post._id} post={post}/>
                                 {
-                                    currentUser && currentUser.role === "admin" && (
+                                    currentUser && (currentUser.role === "admin" || currentUser._id === userId) && (
                                         <div className={"btn btn-danger"} onClick={() => {
                                             deleteCommentHandler(post._id)
 

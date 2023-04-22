@@ -16,15 +16,19 @@ const GameCard = ({gameId}) => {
 
     useEffect(() => {
         fetchDetails()
-    },[])
+    }, [])
 
 
     return (
-        gameDetails ? <div className={"card my-3"} key={gameDetails.id} style={{width: "18rem"}}>
-            <Link to={`/details/${gameDetails.id}`}><h4 className={"card-title"}>{gameDetails.name}</h4></Link>
+        gameDetails ?
+            <div className={"card my-3"} key={gameDetails.id} style={{width: "18rem"}}>
+                <Link to={`/details/${gameDetails.id}`}>
+                    <h4 className={"card-title"}>{gameDetails.name}</h4>
+                    <img className={"card-img-bottom"} src={gameDetails.background_image}></img>
 
-            <img className={"card-img-bottom"} height={"100%"} src={gameDetails.background_image}></img>
-        </div> :
+                </Link>
+            </div>
+            :
             <i className="fas fa-3x fa-spinner fa-spin"></i>
     )
 
