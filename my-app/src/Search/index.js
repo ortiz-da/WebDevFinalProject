@@ -52,7 +52,7 @@ const SearchPage = () => {
             <h1>Search</h1>
 
             <div className={"row"}>
-                <div className={"col-6"}>
+                <div className={"col-12 col-sm-11 col-md-10 col-lg-8 col-xl-7 col-xxl-6"}>
                     <div className={"input-group"}>
                         <input type={"text"} className={"form-control rounded-start"} placeholder={"Search"} onChange={searchChangeHandler}
                                value={searchText}></input>

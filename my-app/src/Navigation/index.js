@@ -12,7 +12,7 @@ const Navigation = () => {
 
     return (
         <div>
-            <p>{JSON.stringify(userData)}</p>
+            {/*<p>{JSON.stringify(userData)}</p>*/}
             <nav className={"navbar-dark py-3"}>
                 {userData.currentUser ?
                     <Link className={"nav-link"} to={"/profile"}>
