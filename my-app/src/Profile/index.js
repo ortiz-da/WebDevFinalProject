@@ -162,20 +162,23 @@ const ProfilePage = () => {
                     )
                 }
 
-                <div className={"row justify-content-center"}>
-                    <div className={"col-2 btn btn-primary mx-3"} onClick={() => navigate(`/profile/${profile._id}/likes`)}>
-                        See Liked Games
-                    </div>
-                    <div className={"col-2 btn btn-primary mx-3"} onClick={() => navigate(`/profile/${profile._id}/comments`)}>
-                        See Comments
-                    </div>
-                    <div className={"col-2 btn btn-primary mx-3"} onClick={() => navigate(`/profile/${profile._id}/following`)}>
-                        See Following
-                    </div>
-                    <div className={"col-2 btn btn-primary mx-3"} onClick={() => navigate(`/profile/${profile._id}/followers`)}>
-                        See Followers
-                    </div>
-                </div>
+
+                {/*Code from: https://getbootstrap.com/docs/5.0/components/navs-tabs/*/}
+
+                <ul className="nav nav-pills justify-content-center">
+                    <li className="nav-item">
+                        <Link className={`nav-link ${userInfo === "likes" && "active"}`} to={`/profile/${profile._id}/likes`} >See Liked Games</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className={`nav-link ${userInfo === "comments" && "active"}`} to={`/profile/${profile._id}/comments`}>See Comments</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className={`nav-link ${userInfo === "following" && "active"}`} to={`/profile/${profile._id}/following`}>See Following</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className={`nav-link ${userInfo === "followers" && "active"}`} to={`/profile/${profile._id}/followers`}>See Followers</Link>
+                    </li>
+                </ul>
 
 
                 {/*CODE BASED ON: https://stackoverflow.com/a/46593006*/}
