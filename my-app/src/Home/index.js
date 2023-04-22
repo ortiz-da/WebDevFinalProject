@@ -40,7 +40,7 @@ const HomePage = () => {
             <Navigation/>
             <h1>Home</h1>
             {
-                currentUser ? <h2>Welcome back {currentUser.username}!</h2> : <h2>Welcome!</h2>
+                currentUser ? <h2>Welcome back {currentUser.username}!</h2> : <h2>Welcome to GameSearch!</h2>
             }
             {
                 currentUser ?
@@ -49,17 +49,20 @@ const HomePage = () => {
                         <UserLikesList userId={currentUser._id}/>
                     </div>
                     :
-                    <div><p>Welcome to gameSearch! This site is made for gamers like you, so you should feel right at
-                        home!</p>
+                    <div><p>🎮This site is made for gamers like you, so you should feel right at
+                        home!🎮</p>
                         <p>Features include:</p>
-                        <ul>
-                            <li>Searching a massive game database</li>
-                            <li>Liking games, which can then be found on your profile</li>
-                            <li>Discussing your favorite games with other users</li>
-                            <li>Following users and seeing what they're up to</li>
+                        <ul className={"list-group border border-secondary my-4"}>
+                            <li className={"list-group-item"}>🕹️ Searching a massive game database</li>
+                            <li className={"list-group-item"}>❤️️ Liking games, which can then be found on your profile</li>
+                            <li className={"list-group-item"}>🗨️️ Comment on your favorite games for others to see</li>
+                            <li className={"list-group-item"}>👾️ Following users and seeing what they're up to</li>
                         </ul>
+
                         <p>Below are just a small sample of the games you can search for here. Click on the image to
-                            view more details.</p></div>
+                            view more details.</p>
+                        <hr/>
+                    </div>
 
             }
 
@@ -79,6 +82,7 @@ const HomePage = () => {
 
                     </div>)}
             </Slider>
+            <hr/>
 
             <h2>Latest Comments</h2>
 
