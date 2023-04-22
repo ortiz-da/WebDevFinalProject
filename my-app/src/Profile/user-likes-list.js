@@ -28,7 +28,7 @@ const UserLikesList = ({userId}) => {
 
             <ul className={"list-group list-group-horizontal position-relative overflow-auto"}>
                 {userLikes &&
-                    userLikes.map(game => <div><GameCard gameId={game.gameId}/></div>
+                    userLikes.map(game => <div className={"mx-2"}><GameCard gameId={game.gameId}/></div>
                     )
                 }
             </ul>

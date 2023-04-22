@@ -16,6 +16,8 @@ const LoginPage = () => {
         role: "normal"
     })
 
+    const [failed, setFailed] = useState(false)
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -26,8 +28,8 @@ const LoginPage = () => {
         try {
             const payload = unwrapResult(result)
             navigate("/profile")
-        }
-        catch (e) {
+        } catch (e) {
+            setFailed(true)
             console.log(e)
         }
     }
@@ -37,7 +39,7 @@ const LoginPage = () => {
             <Navigation/>
             <h1>Login Page</h1>
             <div className={"row"}>
-                <span className={"col-4 border rounded border-primary"}>
+                <div className={"col-4 border rounded border-primary"}>
                     <div className={"my-2"}><input type={"text"} placeholder={"Username"}
                                                    value={user.username}
                                                    onChange={(e) => setUser({...user, username: e.target.value})}
@@ -45,19 +47,24 @@ const LoginPage = () => {
                     <div className={"my-2"}><input type={"password"} placeholder={"Password"}
                                                    value={user.password}
 
-                                                   onChange={(e) => setUser({ ...user, password: e.target.value })}></input></div>
+                                                   onChange={(e) => setUser({
+                                                       ...user,
+                                                       password: e.target.value
+                                                   })}></input></div>
                     <button className={"btn btn-primary my-2"} onClick={login}>Login</button>
-                </span>
-                <p>
+                </div>
+
+                <p className={"my-3"}>
                     Don't have an account? Create one <Link to={"/register"}>HERE</Link>.
                 </p>
-                {/*<span className={"col-3 border rounded mx-3"}>*/}
-                {/*    <p>Password must contain at least:</p>*/}
-                {/*    <div>12 characters</div>*/}
-                {/*    <div>1 letter</div>*/}
-                {/*    <div>1 number</div>*/}
-                {/*    <div>1 special character</div>*/}
-                {/*</span>*/}
+
+                {failed ?
+
+                    <p className={"text-danger"}>Login failed. Please try again.</p>
+                    : null
+                }
+
+
             </div>
 
 
