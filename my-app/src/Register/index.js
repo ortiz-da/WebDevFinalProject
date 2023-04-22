@@ -40,8 +40,7 @@ const RegisterPage = () => {
         <>
             <Navigation/>
             <h1>Register</h1>
-            <div className={"row"}>
-                <span className={"col-4 border rounded border-primary"}>
+            <div className={"border rounded border-primary m-1 p-1 col-7 col-sm-7 col-md-6 col-lg-4 col-xl-3"}>
 
                                         <label htmlFor={"email"}>Email</label>
                     <div id="email" className={"my-2"}><input type={"text"} placeholder={"Email"}
@@ -89,17 +88,7 @@ const RegisterPage = () => {
                     </div>
 
                     <button className={"btn btn-primary my-2 w"} onClick={register}>Register</button>
-                </span>
-                <h1>{user.role}</h1>
-
-                {/*<span className={"col-3 border rounded mx-3"}>*/}
-                {/*    <p>Password must contain at least:</p>*/}
-                {/*    <div>12 characters</div>*/}
-                {/*    <div>1 letter</div>*/}
-                {/*    <div>1 number</div>*/}
-                {/*    <div>1 special character</div>*/}
-                {/*</span>*/}
-            </div>
+                </div>
 
 
         </>

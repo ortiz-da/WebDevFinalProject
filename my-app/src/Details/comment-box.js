@@ -30,7 +30,7 @@ const CommentBox = ({gameDetails}) => {
             <div className={"row"}>
 
 
-                <div className={"col-1"}>
+                <div className={"col-auto"}>
                     <Link className={"nav-link"} to={"/profile"}><img
                         src={currentUser && currentUser.pfp}
                         className={"img-thumbnail rounded-circle float-end"} width={55} height={55}/></Link>

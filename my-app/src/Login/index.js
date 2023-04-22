@@ -37,35 +37,38 @@ const LoginPage = () => {
     return (
         <>
             <Navigation/>
-            <h1>Login Page</h1>
-            <div className={"row"}>
-                <div className={"col-4 border rounded border-primary"}>
-                    <div className={"my-2"}><input type={"text"} placeholder={"Username"}
-                                                   value={user.username}
-                                                   onChange={(e) => setUser({...user, username: e.target.value})}
-                    ></input></div>
-                    <div className={"my-2"}><input type={"password"} placeholder={"Password"}
-                                                   value={user.password}
+            <h1>Login</h1>
 
-                                                   onChange={(e) => setUser({
-                                                       ...user,
-                                                       password: e.target.value
-                                                   })}></input></div>
-                    <button className={"btn btn-primary my-2"} onClick={login}>Login</button>
-                </div>
+            <div className={"border rounded border-primary m-1 p-1 col-7 col-sm-7 col-md-6 col-lg-4 col-xl-3"}>
 
-                <p className={"my-3"}>
-                    Don't have an account? Create one <Link to={"/register"}>HERE</Link>.
-                </p>
+                <label htmlFor={"username"}>Username</label>
+                <div id={"username"} className={"my-2"}><input type={"text"} placeholder={"Username"}
+                                                               value={user.username}
+                                                               onChange={(e) => setUser({
+                                                                   ...user,
+                                                                   username: e.target.value
+                                                               })}
+                ></input></div>
+                <label htmlFor={"password"}>Password</label>
+                <div id={"password"} className={"my-2"}><input type={"password"} placeholder={"Password"}
+                                                               value={user.password}
 
-                {failed ?
-
-                    <p className={"text-danger"}>Login failed. Please try again.</p>
-                    : null
-                }
-
-
+                                                               onChange={(e) => setUser({
+                                                                   ...user,
+                                                                   password: e.target.value
+                                                               })}></input></div>
+                <button className={"btn btn-primary my-2"} onClick={login}>Login</button>
             </div>
+
+            <p className={"my-3"}>
+                Don't have an account? Create one <Link to={"/register"}>HERE</Link>.
+            </p>
+
+            {failed ?
+
+                <p className={"text-danger"}>Login failed. Please try again.</p>
+                : null
+            }
 
 
         </>
