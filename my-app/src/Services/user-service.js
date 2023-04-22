@@ -2,6 +2,8 @@
 
 import axios from "axios";
 const USERS_REST_API_URL = "http://localhost:4000/api/users";
+const LIKES_REST_API_URL = "http://localhost:4000/api/likes";
+
 
 const api = axios.create({
     withCredentials: true,
@@ -53,6 +55,7 @@ export const profile = async () => {
 };
 
 export const getGameLikesByUserId = async (userId) => {
-    const response = await api.get(`${USERS_REST_API_URL}/likes/${userId}`,);
+    console.log("USER SERVICE GETTING GAME LIKES")
+    const response = await api.get(`${LIKES_REST_API_URL}/${userId}`);
     return response.data;
 }

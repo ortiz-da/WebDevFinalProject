@@ -39,12 +39,6 @@ const CommentItem = ({post}) => {
                 </div>
 
                 <div className="col-md-11 col-10 py-2 px-4">
-                    {
-                        currentUser && currentUser.role === "admin" && (
-                            <i className="fas fa-x float-end" onClick={() => deleteCommentHandler(post._id)}></i>
-
-                        )
-                    }
                     <div className="fw-bold">{userInfo.username}
                         <span className="text-secondary fw-normal"> - {post.time}</span>
                     </div>

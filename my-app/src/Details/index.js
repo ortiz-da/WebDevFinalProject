@@ -29,13 +29,14 @@ const DetailsPage = () => {
     const fetchLikes = async () => {
         console.log("FETCHING LIKES")
         const gameLikes = await getGameLikesById(gameId)
+        setLikeCount(gameLikes.length)
+
         for (let i = 0; i < gameLikes.length; i++) {
             if(gameLikes[i].userId === currentUser._id) {
                 console.log("ALREADY LIKED BY CURRENT USER");
                 setHasLiked(true)
             }
         }
-        setLikeCount(gameLikes.length)
     }
 
     useEffect( () => {

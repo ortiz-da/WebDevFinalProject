@@ -6,24 +6,28 @@ import * as gameService from "../Services/game-service.js";
 
 import {useDispatch, useSelector} from "react-redux";
 import {findLikesByUserIdThunk, logoutThunk, profileThunk, updateUserThunk} from "../Thunks/user-thunks";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import {findCommentsByUserId} from "../Services/comments-service";
 import {findCommentsByUserIdThunk} from "../Thunks/comments-thunks";
 import CommentsList from "../Comments/comments-list";
 import CommentItem from "../Comments/comment-item";
+import GameCard from "./game-card";
+import UserLikesList from "./user-likes-list";
+import UserCommentsList from "./user-comments-list";
 
 // USING CODE FROM: https://github.com/jannunzi/tuiter-react-web-app-cs4550-sp23/blob/project/src/profile.js
 
 const ProfilePage = () => {
 
     const {profileId} = useParams();
+
+    const {userInfo} = useParams();
+
     const {currentUser} = useSelector(state => state.userData)
     const [profile, setProfile] = useState({})
 
     const [isEditing, setIsEditing] = useState(false);
 
-    const [userComments, setUserComments] = useState([]);
-    const [userLikes, setUserLikes] = useState([]);
 
 
     const dispatch = useDispatch();
@@ -35,25 +39,10 @@ const ProfilePage = () => {
     };
 
     const getProfile = async () => {
-        // const profile = await userService.profile();
         console.log("GETTING PROFILE ON FRONT END")
         const action = await dispatch(profileThunk());
         setProfile(action.payload);
     };
-
-    const fetchLikes = async (userId) => {
-        console.log(`GETTING LIKES FOR PROFILE ${userId}`)
-        const likes = await dispatch(findLikesByUserIdThunk(userId))
-        // console.log(`__________________${comments}`)
-        setUserLikes(likes.payload)
-    }
-
-    const fetchComments = async (userId) => {
-        console.log(`GETTING COMMENTS FOR PROFILE ${userId}`)
-        const comments = await dispatch(findCommentsByUserIdThunk(userId))
-        // console.log(`__________________${comments}`)
-        setUserComments(comments.payload)
-    }
 
     const getUserById = async () => {
         const user = await userService.findUserById(profileId);
@@ -67,20 +56,47 @@ const ProfilePage = () => {
         setIsEditing(!isEditing)
     };
 
-    useEffect(() => {
-        if (profileId) {
-            getUserById();
-            fetchComments(profileId)
-            fetchLikes(profileId)
-        } else {
-            getProfile();
-            fetchComments(currentUser._id)
-            fetchLikes(currentUser._id)
+    {/*CODE BASED ON: https://stackoverflow.com/a/46593006*/}
 
+    const showDetails = (info) => {
+        switch (info) {
+            case "likes":
+                return <UserLikesList userId={profile._id}/>;
+            case "comments":
+                return <UserCommentsList userId={profile._id}/>;
+            case "following":
+                return <h1>Following info</h1>;
+            case "followers":
+                return <h1>Followers info</h1>;
+            default:
+                return <div></div>
+        }
+    }
+
+    useEffect(() => {
+
+
+        // when page loads
+        // 1 get the user profile (either the currently logged in if no params are provided, or the user that corresponds to the id in the url
+        if (profileId) {
+            getUserById()
+            // .then(fetchComments(profileId));
+
+        } else {
+            getProfile()
+            // .then(fetchComments(profile._id)).then(fetchLikes(profile._id)
         }
 
 
-    }, [profileId]);
+
+        // 2 get comments made by that user
+        // fetchComments(profileId)
+        //
+        //
+        // // 3 fetch the likes of that user
+        // fetchLikes(currentUser._id)
+
+    }, [profile._id]);
 
     return (
         <>
@@ -146,63 +162,82 @@ const ProfilePage = () => {
                     )
                 }
 
-
-                <h2>Followers</h2>
-                <div className={"border border-primary rounded"}>
-                    <img
-                        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}
-                        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>
-                    <img
-                        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}
-                        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>
-                    <img
-                        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}
-                        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>
+                <div className={"row justify-content-center"}>
+                    <div className={"col-2 btn btn-primary mx-3"} onClick={() => navigate(`/profile/${profile._id}/likes`)}>
+                        See Liked Games
+                    </div>
+                    <div className={"col-2 btn btn-primary mx-3"} onClick={() => navigate(`/profile/${profile._id}/comments`)}>
+                        See Comments
+                    </div>
+                    <div className={"col-2 btn btn-primary mx-3"} onClick={() => navigate(`/profile/${profile._id}/following`)}>
+                        See Following
+                    </div>
+                    <div className={"col-2 btn btn-primary mx-3"} onClick={() => navigate(`/profile/${profile._id}/followers`)}>
+                        See Followers
+                    </div>
                 </div>
 
-                <h2>Following</h2>
-                <div className={"border border-primary rounded"}>
-                    <img
-                        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}
-                        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>
-                    <img
-                        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}
-                        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>
-                    <img
-                        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}
-                        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>
 
-                </div>
-
-                <h2>Liked Games</h2>
-                <ul className={"list-group"}>
-                    {
-                        <ul className={"list-group"}>
-                            {
-                                userLikes && userLikes.map(game =>
-                                <Link to={`/details/${game.gameId}`}>{game.gameName}</Link>
-                                )
-
-                            }
-                        </ul>
-                    }
-                </ul>
-
-                <h2>Comments Made</h2>
+                {/*CODE BASED ON: https://stackoverflow.com/a/46593006*/}
                 {
-                    <ul className={"list-group"}>
-                        {userComments && (
-                            userComments && userComments.map(post =>
-                                <div>On <Link to={`/details/${post.gameId}`}>{post.gameName}</Link><CommentItem
-                                    key={post._id} post={post}/>
-                                    <hr></hr>
-                                </div>
-                            )
-                        )
-
-                        }
-                    </ul>
+                    showDetails(userInfo)
                 }
+
+                {/*<h2>Followers</h2>*/}
+                {/*<div className={"border border-primary rounded"}>*/}
+                {/*    <img*/}
+                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
+                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
+                {/*    <img*/}
+                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
+                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
+                {/*    <img*/}
+                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
+                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
+                {/*</div>*/}
+
+                {/*<h2>Following</h2>*/}
+                {/*<div className={"border border-primary rounded"}>*/}
+                {/*    <img*/}
+                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
+                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
+                {/*    <img*/}
+                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
+                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
+                {/*    <img*/}
+                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
+                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
+
+                {/*</div>*/}
+
+                {/*<ul className={"list-group"}>*/}
+                {/*    {*/}
+                {/*        // CODE FROM: https://mdbootstrap.com/docs/standard/extended/horizontal-list/*/}
+                {/*        <ul className={"list-group list-group-horizontal position-relative overflow-auto"}>*/}
+                {/*            {*/}
+                {/*                userLikes && userLikes.map(game =>*/}
+                {/*                    <Link to={`/details/${game.gameId}`}><GameCard gameId={game.gameId}/></Link>*/}
+                {/*                )*/}
+
+                {/*            }*/}
+                {/*        </ul>*/}
+                {/*    }*/}
+                {/*</ul>*/}
+
+                {/*{*/}
+                {/*    <ul className={"list-group"}>*/}
+                {/*        {userComments && (*/}
+                {/*            userComments && userComments.map(post =>*/}
+                {/*                <div>On <Link to={`/details/${post.gameId}`}>{post.gameName}</Link><CommentItem*/}
+                {/*                    key={post._id} post={post}/>*/}
+                {/*                    <hr></hr>*/}
+                {/*                </div>*/}
+                {/*            )*/}
+                {/*        )*/}
+
+                {/*        }*/}
+                {/*    </ul>*/}
+                {/*}*/}
             </div>}
 
 
