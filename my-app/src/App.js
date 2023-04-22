@@ -14,6 +14,7 @@ import {Provider} from "react-redux";
 import userReducer from "./Reducers/user-reducer";
 import RegisterPage from "./Register";
 import CurrentUserContext from "./Reducers/current-user-context";
+import StatsPage from "./Profile/stats-page";
 
 
 const store = configureStore({
@@ -41,7 +42,7 @@ function App() {
                             <Route path={"/profile"} element={<ProfilePage/>}></Route>
                             <Route path={"/profile/:profileId"} element={<ProfilePage/>}></Route>
                             <Route path={"/profile/:profileId/:userInfo"} element={<ProfilePage/>}></Route>
-
+                            <Route path={"/stats"} element={<StatsPage/>}></Route>
                             <Route path={"/search/"} element={<SearchPage/>}></Route>
                             <Route path={"/search/:query"} element={<SearchPage/>}></Route>
                             <Route path={"/register"} element={<RegisterPage/>}></Route>

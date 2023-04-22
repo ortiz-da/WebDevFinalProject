@@ -76,6 +76,7 @@ const ProfilePage = () => {
     useEffect(() => {
 
 
+
         // when page loads
         // 1 get the user profile (either the currently logged in if no params are provided, or the user that corresponds to the id in the url
         if (profileId) {
@@ -83,7 +84,10 @@ const ProfilePage = () => {
             // .then(fetchComments(profileId));
 
         } else {
-            getProfile()
+            if(currentUser) {
+                getProfile()
+
+            }
             // .then(fetchComments(profile._id)).then(fetchLikes(profile._id)
         }
 
@@ -96,9 +100,9 @@ const ProfilePage = () => {
         // // 3 fetch the likes of that user
         // fetchLikes(currentUser._id)
 
-    }, [profile._id]);
+    }, [profile._id, profileId]);
 
-    return (
+    return ( currentUser &&
         <>
             <Navigation/>
 
@@ -152,13 +156,23 @@ const ProfilePage = () => {
                 {currentUser !== null && (currentUser._id === profile._id || currentUser.role === "admin") &&
                     (<div>
                             <button className={"btn btn-primary"} onClick={() =>
-                                handleEditButton()}>{isEditing ? "Save" : "Edit"}</button>
-
-                            <div className={"pt-2"}>
-                                <button className={"btn btn-danger"} onClick={logout}>Logout</button>
-                            </div>
-                            <hr/>
+                                handleEditButton()}>{isEditing ? "Save" : "Edit"} <i className={"fa fa-pencil"}/> </button>
                         </div>
+                    )
+                }
+                {currentUser !== null && (currentUser._id === profile._id) &&
+                    (
+                        <div className={"pt-2"}>
+                            <button className={"btn btn-danger"} onClick={logout}>Logout <i className={"fa fa-sign-out"}/></button>
+                        </div>
+                    )
+                }
+
+                <hr/>
+
+                {
+                    currentUser !== null && currentUser._id === profile._id && (
+                        <div className={"btn btn-secondary"} onClick={() => navigate("/stats")}>My Stats <i className={"fa fa-bar-chart"}/></div>
                     )
                 }
 
