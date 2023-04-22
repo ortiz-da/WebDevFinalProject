@@ -38,8 +38,6 @@ const UserCommentsList = ({userId}) => {
 
     return (
         <div>
-            <h1>User Comments</h1>
-
             <ul className={"list-group"}>
                 {
                     userComments && userComments.map(post =>

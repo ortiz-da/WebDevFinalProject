@@ -23,7 +23,6 @@ const UserLikesList = ({userId}) => {
 
     return (
         <div>
-            <h1>User likes</h1>
 
             {/*CODE FROM: https://mdbootstrap.com/docs/standard/extended/horizontal-list/*/}
 
