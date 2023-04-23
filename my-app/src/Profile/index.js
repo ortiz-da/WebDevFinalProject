@@ -111,13 +111,11 @@ const ProfilePage = () => {
             // .then(fetchComments(profileId));
 
         } else {
-            if (currentUser) {
-                getProfile()
-            }
+            getProfile()
         }
 
 
-    }, [profile._id, profileId]);
+    }, [profile._id, profileId,]);
 
 
     useEffect(() => {

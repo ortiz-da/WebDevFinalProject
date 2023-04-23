@@ -27,7 +27,9 @@ const GameCard = ({gameId}) => {
                     {/*USING: https://getbootstrap.com/docs/4.0/components/card/*/}
                     {/*https://stackoverflow.com/questions/37287153/how-to-get-images-in-bootstraps-card-to-be-the-same-height-width*/}
 
-                    <img className="card-img-top" src={gameDetails.background_image} alt="Card image"
+                    <img className="card-img-top" src={gameDetails.background_image === null ?
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Video_Game_Controller_%2856431%29_-_The_Noun_Project.svg/640px-Video_Game_Controller_%2856431%29_-_The_Noun_Project.svg.png": gameDetails.background_image}
+                         alt="Game Image"
                          style={{width: "100%", height: "18rem", objectFit: "cover"}}/>
                     <div className="card-footer bg-black text-white" style={{minHeight: "4rem"}}>
                         {gameDetails.name}
