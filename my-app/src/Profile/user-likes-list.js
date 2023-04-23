@@ -21,17 +21,13 @@ const UserLikesList = ({userId}) => {
     }, [userId])
 
 
+    // USING: https://stackoverflow.com/a/19608958
     return (
-        <div>
-
-            {/*CODE FROM: https://mdbootstrap.com/docs/standard/extended/horizontal-list/*/}
-
-            <ul className={"list-group list-group-horizontal position-relative overflow-auto"}>
-                {userLikes &&
-                    userLikes.map(game => <div className={"mx-2"}><GameCard gameId={game.gameId}/></div>
-                    )
-                }
-            </ul>
+        <div className={"row"}>
+            {userLikes &&
+                userLikes.map(game => <div className={"col-auto my-5"}><GameCard gameId={game.gameId}/></div>
+                )
+            }
         </div>
 
 

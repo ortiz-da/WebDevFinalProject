@@ -61,16 +61,25 @@ const SearchPage = () => {
                     </div>
                 </div>
             </div>
-            <ul className={"list-group"}>
+            <ul className={"row"}>
                 {
                     results.map((result) =>
+                        <div className={"col-auto my-5"}>
+                            <div className={"card my-3 bg-dark text-white m-1"} key={result.id}
+                                 style={{width: "18rem", height: "18rem"}}>
+                                <Link to={`/details/${result.id}`}>
+                                    {/*USING: https://getbootstrap.com/docs/4.0/components/card/*/}
+                                    {/*https://stackoverflow.com/questions/37287153/how-to-get-images-in-bootstraps-card-to-be-the-same-height-width*/}
 
-                        <div className={"card my-3"} key={result.id} style={{width: "18rem"}}>
-                            <Link to={`/details/${result.id}`}>
-                                <h4 className={"card-title"}>{result.name}</h4>
-                                <img className={"card-img-bottom"} src={result.background_image}></img>
-
-                            </Link>
+                                    <img className="card-img-top" src={result.background_image === null ?
+                                        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Video_Game_Controller_%2856431%29_-_The_Noun_Project.svg/640px-Video_Game_Controller_%2856431%29_-_The_Noun_Project.svg.png": result.background_image}
+                                         alt="Game Image"
+                                         style={{width: "100%", height: "18rem", objectFit: "cover"}}/>
+                                    <div className="card-footer bg-black text-white" style={{minHeight: "4rem"}}>
+                                        {result.name}
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
                     )
                 }
