@@ -28,6 +28,8 @@ const ProfilePage = () => {
 
     const [isEditing, setIsEditing] = useState(false);
 
+    const [isFollowing, setIsFollowing] = useState(false);
+
 
 
     const dispatch = useDispatch();
@@ -54,6 +56,18 @@ const ProfilePage = () => {
             await dispatch(updateUserThunk(profile))
         }
         setIsEditing(!isEditing)
+    };
+
+    const handleFollowButton = async () => {
+        if (isFollowing) {
+            const result = await userService.findUserById(profileId);
+
+        }
+        else {
+            const result = await userService.findUserById(profileId);
+
+        }
+        setIsFollowing(!isFollowing)
     };
 
     {/*CODE BASED ON: https://stackoverflow.com/a/46593006*/}
@@ -86,23 +100,13 @@ const ProfilePage = () => {
         } else {
             if(currentUser) {
                 getProfile()
-
             }
-            // .then(fetchComments(profile._id)).then(fetchLikes(profile._id)
         }
 
 
-
-        // 2 get comments made by that user
-        // fetchComments(profileId)
-        //
-        //
-        // // 3 fetch the likes of that user
-        // fetchLikes(currentUser._id)
-
     }, [profile._id, profileId]);
 
-    return ( currentUser &&
+    return ( (currentUser || profileId) &&
         <>
             <Navigation/>
 
@@ -153,6 +157,14 @@ const ProfilePage = () => {
                     </div>
                 </div>
 
+                {currentUser !== null && (currentUser._id !== profile._id ) &&
+                    (<div>
+                            <button className={"btn btn-secondary"} onClick={() =>
+                                handleFollowButton()}>{isFollowing ? "Unfollow": "Follow" } <i className={isFollowing ? "fa fa-user-minus" : "fa fa-user-plus"}/> </button>
+                        </div>
+                    )
+                }
+
                 {currentUser !== null && (currentUser._id === profile._id || currentUser.role === "admin") &&
                     (<div>
                             <button className={"btn btn-primary"} onClick={() =>
@@ -163,7 +175,7 @@ const ProfilePage = () => {
                 {currentUser !== null && (currentUser._id === profile._id) &&
                     (
                         <div className={"pt-2"}>
-                            <button className={"btn btn-danger"} onClick={logout}>Logout <i className={"fa fa-sign-out"}/></button>
+                            <button className={"btn btn-danger"} onClick={logout}>Log out <i className={"fa fa-sign-out"}/></button>
                         </div>
                     )
                 }
