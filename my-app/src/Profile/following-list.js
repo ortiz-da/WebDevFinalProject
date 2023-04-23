@@ -8,33 +8,33 @@ import {getFollowers} from "../Services/follow-service";
 import * as followService from "../Services/follow-service";
 import AccountChip from "./account-chip";
 
-const FollowerList = ({userId}) => {
+const FollowingList = ({userId}) => {
 
-    const [userFollowers, setUserFollowers] = useState([]);
+    const [userFollowing, setUserFollowing] = useState([]);
 
-    const fetchUserFollowers = async () => {
+    const fetchUserFollowing = async () => {
 
         if (userId) {
-            const followers = await followService.getFollowers(userId)
-            console.log(followers)
-            setUserFollowers(followers)
+            const following = await followService.getFollowing(userId)
+
+            setUserFollowing(following)
         }
 
     }
 
 
     useEffect(() => {
-        fetchUserFollowers()
+        fetchUserFollowing()
     }, [userId])
 
 
     // USING: https://stackoverflow.com/a/19608958
     return (
         <div className={"list-group my-4"}>
-            {userFollowers &&
-                userFollowers.map(follow =>
+            {userFollowing &&
+                userFollowing.map(follow =>
                     <div className={"list-group-item"}>
-                        <AccountChip userId={follow.follower}></AccountChip>
+                        <AccountChip userId={follow.following}></AccountChip>
                     </div>
                 )
             }
@@ -44,4 +44,4 @@ const FollowerList = ({userId}) => {
     )
 }
 
-export default FollowerList;
+export default FollowingList;

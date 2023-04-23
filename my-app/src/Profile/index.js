@@ -16,6 +16,7 @@ import GameCard from "./game-card";
 import UserLikesList from "./user-likes-list";
 import UserCommentsList from "./user-comments-list";
 import FollowersList from "./followers-list";
+import FollowingList from "./following-list";
 
 // USING CODE FROM: https://github.com/jannunzi/tuiter-react-web-app-cs4550-sp23/blob/project/src/profile.js
 
@@ -94,7 +95,7 @@ const ProfilePage = () => {
             case "comments":
                 return <UserCommentsList userId={profile._id}/>;
             case "following":
-                return <h1>Following info</h1>;
+                return <FollowingList userId={profile._id}/>
             case "followers":
                 return <FollowersList userId={profile._id}/>;
             default:
