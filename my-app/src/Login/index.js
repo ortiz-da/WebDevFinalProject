@@ -39,7 +39,7 @@ const LoginPage = () => {
             <Navigation/>
             <h1>Login</h1>
 
-            <div className={"border rounded border-primary m-1 p-1 col-7 col-sm-7 col-md-6 col-lg-4 col-xl-3"}>
+            <div className={"border rounded border-primary m-1 p-3 p-1 col-7 col-sm-7 col-md-6 col-lg-4 col-xl-3"}>
 
                 <label htmlFor={"username"}>Username</label>
                 <div id={"username"} className={"my-2"}><input type={"text"} placeholder={"Username"}
@@ -60,7 +60,7 @@ const LoginPage = () => {
                 <button className={"btn btn-primary my-2"} onClick={login}>Login</button>
             </div>
 
-            <p className={"my-3"}>
+            <p className={"my-3 px-3"}>
                 Don't have an account? Create one <Link to={"/register"}>HERE</Link>.
             </p>
 

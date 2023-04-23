@@ -14,6 +14,7 @@ const UserLikesList = ({userId, length}) => {
         let likes = await getGameLikesByUserId(userId)
         if(length && length < likes.length) {
             likes = likes.slice(0,length)
+
         }
         setUserLikes(likes)
     }

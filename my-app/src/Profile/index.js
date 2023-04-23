@@ -79,7 +79,6 @@ const ProfilePage = () => {
         if (isFollowing) {
             const result = await followService.unFollowUser(follow)
         } else {
-
             const result = await followService.followUser(follow)
         }
         setIsFollowing(!isFollowing)
@@ -117,7 +116,7 @@ const ProfilePage = () => {
         }
 
 
-    }, [ profileId,]);
+    }, [profileId,]);
 
 
     useEffect(() => {
@@ -218,20 +217,20 @@ const ProfilePage = () => {
 
                 <ul className="nav nav-pills justify-content-center">
                     <li className="nav-item mx-1">
-                        <Link className={`nav-link ${userInfo === "likes" && "active"}`}
-                              to={`/profile/${profile._id}/likes`}>See Liked Games</Link>
+                        <Link className={`nav-link ${(userInfo === "likes") && "active"}`}
+                              to={profileId ? `/profile/${profile._id}/about/likes` : `/profile/about/likes`}>See Liked Games</Link>
                     </li>
                     <li className="nav-item mx-1">
                         <Link className={`nav-link ${userInfo === "comments" && "active"}`}
-                              to={`/profile/${profile._id}/comments`}>See Comments</Link>
+                              to={profileId ? `/profile/${profile._id}/about/comments` : `/profile/about/comments`}>See Comments</Link>
                     </li>
                     <li className="nav-item mx-1">
                         <Link className={`nav-link ${userInfo === "following" && "active"}`}
-                              to={`/profile/${profile._id}/following`}>See Following</Link>
+                              to={profileId ? `/profile/${profile._id}/about/following` : `/profile/about/following`}>See Following</Link>
                     </li>
                     <li className="nav-item mx-1">
                         <Link className={`nav-link ${userInfo === "followers" && "active"}`}
-                              to={`/profile/${profile._id}/followers`}>See Followers</Link>
+                              to={profileId ? `/profile/${profile._id}/about/followers` : `/profile/about/followers`}>See Followers</Link>
                     </li>
                 </ul>
 
@@ -240,62 +239,6 @@ const ProfilePage = () => {
                 {
                     showDetails(userInfo)
                 }
-
-                {/*<h2>Followers</h2>*/}
-                {/*<div className={"border border-primary rounded"}>*/}
-                {/*    <img*/}
-                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
-                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
-                {/*    <img*/}
-                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
-                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
-                {/*    <img*/}
-                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
-                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
-                {/*</div>*/}
-
-                {/*<h2>Following</h2>*/}
-                {/*<div className={"border border-primary rounded"}>*/}
-                {/*    <img*/}
-                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
-                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
-                {/*    <img*/}
-                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
-                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
-                {/*    <img*/}
-                {/*        src={"https://yt3.googleusercontent.com/rPTMAygaSNkMnSRNRscSk8LYA_d_lUSUbVnswtDjYpzz_Xf7WXXvCL4G7eDmgclQqcIJRwwBAw4=s176-c-k-c0x00ffffff-no-rj"}*/}
-                {/*        className={"img-thumbnail rounded-circle m-2"} width={75} height={75}/>*/}
-
-                {/*</div>*/}
-
-                {/*<ul className={"list-group"}>*/}
-                {/*    {*/}
-                {/*        // CODE FROM: https://mdbootstrap.com/docs/standard/extended/horizontal-list/*/}
-                {/*        <ul className={"list-group list-group-horizontal position-relative overflow-auto"}>*/}
-                {/*            {*/}
-                {/*                userLikes && userLikes.map(game =>*/}
-                {/*                    <Link to={`/details/${game.gameId}`}><GameCard gameId={game.gameId}/></Link>*/}
-                {/*                )*/}
-
-                {/*            }*/}
-                {/*        </ul>*/}
-                {/*    }*/}
-                {/*</ul>*/}
-
-                {/*{*/}
-                {/*    <ul className={"list-group"}>*/}
-                {/*        {userComments && (*/}
-                {/*            userComments && userComments.map(post =>*/}
-                {/*                <div>On <Link to={`/details/${post.gameId}`}>{post.gameName}</Link><CommentItem*/}
-                {/*                    key={post._id} post={post}/>*/}
-                {/*                    <hr></hr>*/}
-                {/*                </div>*/}
-                {/*            )*/}
-                {/*        )*/}
-
-                {/*        }*/}
-                {/*    </ul>*/}
-                {/*}*/}
             </div>}
 
 
