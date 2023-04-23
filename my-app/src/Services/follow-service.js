@@ -1,7 +1,8 @@
 // USING: https://github.com/jannunzi/tuiter-react-web-app-cs4550-sp23/
 
 import axios from "axios";
-const REST_API_URL = "http://localhost:4000/api/";
+
+const REST_API_URL = "http://localhost:4000/api";
 
 
 const api = axios.create({
@@ -19,11 +20,11 @@ export const unFollowUser = async (follow) => {
 };
 
 export const getFollowing = async (userId) => {
-    const response = await api.get(`${REST_API_URL}/followed/`, userId);
+    const response = await api.get(`${REST_API_URL}/follows/followed/${userId}`);
     return response.data;
 };
 
 export const getFollowers = async (userId) => {
-    const response = await api.get(`${REST_API_URL}/followers/`, userId);
+    const response = await api.get(`${REST_API_URL}/follows/followers/${userId}`);
     return response.data;
 };

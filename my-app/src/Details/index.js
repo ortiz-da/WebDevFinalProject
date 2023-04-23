@@ -35,6 +35,7 @@ const DetailsPage = () => {
             if(gameLikes[i].userId === currentUser._id) {
                 console.log("ALREADY LIKED BY CURRENT USER");
                 setHasLiked(true)
+                break;
             }
         }
     }

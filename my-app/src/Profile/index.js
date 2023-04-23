@@ -2,6 +2,7 @@ import React, {useState, useEffect, useSyncExternalStore} from "react";
 import Navigation from "../Navigation";
 import * as userService from "../Services/user-service.js";
 import * as gameService from "../Services/game-service.js";
+import * as followService from "../Services/follow-service"
 
 
 import {useDispatch, useSelector} from "react-redux";
@@ -31,7 +32,6 @@ const ProfilePage = () => {
     const [isFollowing, setIsFollowing] = useState(false);
 
 
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const logout = async () => {
@@ -51,6 +51,16 @@ const ProfilePage = () => {
         setProfile(user);
     };
 
+    const checkIfFollowing = async () => {
+        const followers = await followService.getFollowers(profileId)
+        for (let i = 0; i < followers.length; i++) {
+            if (followers[i].follower === currentUser._id) {
+                setIsFollowing(true)
+                break
+            }
+        }
+    }
+
     const handleEditButton = async () => {
         if (isEditing) {
             await dispatch(updateUserThunk(profile))
@@ -59,18 +69,22 @@ const ProfilePage = () => {
     };
 
     const handleFollowButton = async () => {
-        if (isFollowing) {
-            const result = await userService.findUserById(profileId);
-
+        const follow = {
+            "follower": currentUser._id,
+            "following": profile._id
         }
-        else {
-            const result = await userService.findUserById(profileId);
 
+        if (isFollowing) {
+            const result = await followService.unFollowUser(follow)
+        } else {
+
+            const result = await followService.followUser(follow)
         }
         setIsFollowing(!isFollowing)
     };
 
-    {/*CODE BASED ON: https://stackoverflow.com/a/46593006*/}
+    {/*CODE BASED ON: https://stackoverflow.com/a/46593006*/
+    }
 
     const showDetails = (info) => {
         switch (info) {
@@ -90,7 +104,6 @@ const ProfilePage = () => {
     useEffect(() => {
 
 
-
         // when page loads
         // 1 get the user profile (either the currently logged in if no params are provided, or the user that corresponds to the id in the url
         if (profileId) {
@@ -98,7 +111,7 @@ const ProfilePage = () => {
             // .then(fetchComments(profileId));
 
         } else {
-            if(currentUser) {
+            if (currentUser) {
                 getProfile()
             }
         }
@@ -106,7 +119,15 @@ const ProfilePage = () => {
 
     }, [profile._id, profileId]);
 
-    return ( (currentUser || profileId) &&
+
+    useEffect(() => {
+        if (profileId && currentUser) {
+            checkIfFollowing()
+
+        }
+    }, [currentUser, profileId])
+
+    return ((currentUser || profileId) &&
         <>
             <Navigation/>
 
@@ -157,10 +178,11 @@ const ProfilePage = () => {
                     </div>
                 </div>
 
-                {currentUser !== null && (currentUser._id !== profile._id ) &&
-                    (<div>
+                {currentUser !== null && (currentUser._id !== profile._id) &&
+                    (<div className={"my-3"}>
                             <button className={"btn btn-secondary"} onClick={() =>
-                                handleFollowButton()}>{isFollowing ? "Unfollow": "Follow" } <i className={isFollowing ? "fa fa-user-minus" : "fa fa-user-plus"}/> </button>
+                                handleFollowButton()}>{isFollowing ? "Unfollow" : "Follow"} <i
+                                className={isFollowing ? "fa fa-user-minus" : "fa fa-user-plus"}/></button>
                         </div>
                     )
                 }
@@ -168,14 +190,16 @@ const ProfilePage = () => {
                 {currentUser !== null && (currentUser._id === profile._id || currentUser.role === "admin") &&
                     (<div>
                             <button className={"btn btn-primary"} onClick={() =>
-                                handleEditButton()}>{isEditing ? "Save" : "Edit"} <i className={"fa fa-pencil"}/> </button>
+                                handleEditButton()}>{isEditing ? "Save" : "Edit"} <i className={"fa fa-pencil"}/>
+                            </button>
                         </div>
                     )
                 }
                 {currentUser !== null && (currentUser._id === profile._id) &&
                     (
                         <div className={"pt-2"}>
-                            <button className={"btn btn-danger"} onClick={logout}>Log out <i className={"fa fa-sign-out"}/></button>
+                            <button className={"btn btn-danger"} onClick={logout}>Log out <i
+                                className={"fa fa-sign-out"}/></button>
                         </div>
                     )
                 }
@@ -184,7 +208,8 @@ const ProfilePage = () => {
 
                 {
                     currentUser !== null && currentUser._id === profile._id && (
-                        <div className={"btn btn-secondary"} onClick={() => navigate("/stats")}>My Stats <i className={"fa fa-bar-chart"}/></div>
+                        <div className={"btn btn-secondary"} onClick={() => navigate("/stats")}>My Stats <i
+                            className={"fa fa-bar-chart"}/></div>
                     )
                 }
 
@@ -193,16 +218,20 @@ const ProfilePage = () => {
 
                 <ul className="nav nav-pills justify-content-center">
                     <li className="nav-item">
-                        <Link className={`nav-link ${userInfo === "likes" && "active"}`} to={`/profile/${profile._id}/likes`} >See Liked Games</Link>
+                        <Link className={`nav-link ${userInfo === "likes" && "active"}`}
+                              to={`/profile/${profile._id}/likes`}>See Liked Games</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className={`nav-link ${userInfo === "comments" && "active"}`} to={`/profile/${profile._id}/comments`}>See Comments</Link>
+                        <Link className={`nav-link ${userInfo === "comments" && "active"}`}
+                              to={`/profile/${profile._id}/comments`}>See Comments</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className={`nav-link ${userInfo === "following" && "active"}`} to={`/profile/${profile._id}/following`}>See Following</Link>
+                        <Link className={`nav-link ${userInfo === "following" && "active"}`}
+                              to={`/profile/${profile._id}/following`}>See Following</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className={`nav-link ${userInfo === "followers" && "active"}`} to={`/profile/${profile._id}/followers`}>See Followers</Link>
+                        <Link className={`nav-link ${userInfo === "followers" && "active"}`}
+                              to={`/profile/${profile._id}/followers`}>See Followers</Link>
                     </li>
                 </ul>
 
