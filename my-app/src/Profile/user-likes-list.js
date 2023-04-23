@@ -5,13 +5,16 @@ import {useDispatch} from "react-redux";
 import {findLikesByUserIdThunk} from "../Thunks/user-thunks";
 import {getGameLikesByUserId} from "../Services/user-service";
 
-const UserLikesList = ({userId}) => {
+const UserLikesList = ({userId, length}) => {
 
     const [userLikes, setUserLikes] = useState();
 
     const fetchLikes = async () => {
         console.log(`GETTING LIKES FOR PROFILE ${userId}`)
-        const likes = await getGameLikesByUserId(userId)
+        let likes = await getGameLikesByUserId(userId)
+        if(length && length < likes.length) {
+            likes = likes.slice(0,length)
+        }
         setUserLikes(likes)
     }
 

@@ -44,9 +44,9 @@ const HomePage = () => {
             }
             {
                 currentUser ?
-                    <div>
+                    <div className={"my-4"}>
                         <p>Re-visit some of your liked games:</p>
-                        <UserLikesList userId={currentUser._id}/>
+                        <UserLikesList userId={currentUser._id} length={3} />
                     </div>
                     :
                     <div><p>🎮This site is made for gamers like you, so you should feel right at
