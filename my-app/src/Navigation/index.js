@@ -13,6 +13,11 @@ const Navigation = () => {
     return (
         <div>
             {/*<p>{JSON.stringify(userData)}</p>*/}
+            {
+                userData.currentUser &&
+                userData.currentUser.role === "admin" &&
+                <div className={"text-white bg-danger bg-gradient text-center rounded-bottom"}><h4>Admin Account</h4></div>
+            }
             <nav className={"navbar-dark py-3"}>
                 {userData.currentUser ?
                     <Link className={"nav-link"} to={"/profile"}>

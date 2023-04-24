@@ -14,6 +14,7 @@ import userReducer from "./Reducers/user-reducer";
 import RegisterPage from "./Register";
 import CurrentUserContext from "./Reducers/current-user-context";
 import StatsPage from "./Profile/stats-page";
+import AdminPage from "./Admin";
 
 
 const store = configureStore({
@@ -48,6 +49,8 @@ function App() {
                             <Route path={"/search/"} element={<SearchPage/>}></Route>
                             <Route path={"/search/:query"} element={<SearchPage/>}></Route>
                             <Route path={"/register"} element={<RegisterPage/>}></Route>
+                            <Route path={"/admin"} element={<AdminPage/>}></Route>
+
 
 
                         </Routes>

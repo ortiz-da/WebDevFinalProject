@@ -213,6 +213,15 @@ const ProfilePage = () => {
                     )
                 }
 
+                {currentUser !== null && (currentUser._id === profile._id && currentUser.role === "admin") &&
+                    (
+                        <span className={"ps-2 float-end"}>
+                            <button className={"btn btn-warning"} onClick={() => navigate(`/admin`)}>Admin page <i
+                                className="fa-solid fa-screwdriver-wrench"></i></button>
+                        </span>
+                    )
+                }
+
                 <hr/>
 
                 {

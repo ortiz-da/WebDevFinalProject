@@ -37,7 +37,9 @@ const HomePage = () => {
 
     return (
         <div>
+
             <Navigation/>
+
             <h1>Home</h1>
             {
                 currentUser ? <h2>Welcome back {currentUser.username}!</h2> : <h2>Welcome to GameSearch!</h2>

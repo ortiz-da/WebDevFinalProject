@@ -59,3 +59,8 @@ export const getGameLikesByUserId = async (userId) => {
     const response = await api.get(`${LIKES_REST_API_URL}/${userId}`);
     return response.data;
 }
+
+export const getAllLikes = async () => {
+    const response = await api.get(`${LIKES_REST_API_URL}`);
+    return response.data;
+}
