@@ -7,7 +7,6 @@ import HomePage from "./Home";
 import LoginPage from "./Login";
 import ProfilePage from "./Profile";
 import SearchPage from "./Search";
-import ResultsPage from "./Results";
 import {configureStore} from "@reduxjs/toolkit";
 import commentReducer from "./Reducers/comment-reducer";
 import {Provider} from "react-redux";

@@ -9,9 +9,9 @@ const AccountChip = ({userId}) => {
 
     const fetchUserInfo = async () => {
         if (userId) {
-            console.log(userId)
+            // console.log(userId)
             const user = await userService.findUserById(userId);
-            console.log(user)
+            // console.log(user)
             setUserInfo(user);
         }
     }

@@ -32,7 +32,7 @@ const DetailsPage = () => {
         setLikeCount(gameLikes.length)
 
         for (let i = 0; i < gameLikes.length; i++) {
-            if(gameLikes[i].userId === currentUser._id) {
+            if (gameLikes[i].userId === currentUser._id) {
                 console.log("ALREADY LIKED BY CURRENT USER");
                 setHasLiked(true)
                 break;
@@ -40,23 +40,23 @@ const DetailsPage = () => {
         }
     }
 
-    useEffect( () => {
+    useEffect(() => {
 
         fetchLikes()
 
-    },[currentUser])
+    }, [currentUser])
 
     useEffect(() => {
 
         fetchDetails()
-    },[])
+    }, [])
 
 
     let navigate = useNavigate();
 
     const handleLikeButton = async () => {
 
-        if(currentUser) {
+        if (currentUser) {
             if (!hasLiked) {
                 console.log("liking game")
                 await likeGame({name: details.name, gameId: gameId});
@@ -68,8 +68,7 @@ const DetailsPage = () => {
                 setHasLiked(false)
                 setLikeCount(likeCount - 1)
             }
-        }
-        else {
+        } else {
             navigate("/login")
         }
 
@@ -77,11 +76,13 @@ const DetailsPage = () => {
     }
 
 
-    return(
+    return (
         <>
             <Navigation/>
 
-            <button className={"btn btn-primary"} onClick={() => navigate(-1)}>Back</button>
+            <button className={"btn btn-primary"} onClick={() => navigate(-1)}><i
+                className="fa-solid fa-arrow-left"></i> Back
+            </button>
 
             <h1>Details</h1>
 
@@ -90,18 +91,18 @@ const DetailsPage = () => {
                 <img className={"img-fluid"} src={details.background_image}/>
                 {
 
-                        <div
-                            onClick={handleLikeButton}
-                            className={"position-absolute start-0 bottom-0 text-light m-2 fs-2 fw-bold bg-white bg-gradient mx-0 rounded-end"}>
-                            {/*from tuiter*/}
-                            <div className={"mx-3 "}>
-                                {hasLiked ?
-                                    <i className={"fas fa-heart"} style={{color: "red"}}></i> :
-                                    <i className={"far fa-heart"}></i>}
-                                {likeCount} - {details.name}
-                            </div>
-
+                    <div
+                        onClick={handleLikeButton}
+                        className={"position-absolute start-0 bottom-0 text-light m-2 fs-2 fw-bold bg-white bg-gradient mx-0 rounded-end"}>
+                        {/*from tuiter*/}
+                        <div className={"mx-3 "}>
+                            {hasLiked ?
+                                <i className={"fas fa-heart"} style={{color: "red"}}></i> :
+                                <i className={"far fa-heart"}></i>}
+                            {likeCount} - {details.name}
                         </div>
+
+                    </div>
 
                 }
 
@@ -109,29 +110,36 @@ const DetailsPage = () => {
             <h2>About</h2>
 
             {/*https://medium.com/@uigalaxy7/how-to-render-html-in-react-7f3c73f5cafc*/}
-            <div className={"border rounded border-primary p-3 my-4"} dangerouslySetInnerHTML={{__html: details.description}}></div>
+            <div className={"border rounded border-primary p-3 my-4"}
+                 dangerouslySetInnerHTML={{__html: details.description}}></div>
 
             <div className={"container"}>
                 <div className={"row"}>
                     <div className={"col-3 border-primary"}>
-                        <div className={"row border-top border-bottom border-primary border-end fw-bolder px-3"}>Website</div>
+                        <div
+                            className={"row border-top border-bottom border-primary border-end fw-bolder px-3"}>Website
+                        </div>
                         <div className={"row border-bottom border-primary border-end fw-bolder px-3"}>Release Date</div>
-                        <div className={"row border-bottom border-primary border-end fw-bolder px-3"}>Metacritic Rating</div>
+                        <div className={"row border-bottom border-primary border-end fw-bolder px-3"}>Metacritic
+                            Rating
+                        </div>
                         <div className={"row border-bottom border-primary border-end fw-bolder px-3"}>Subreddit</div>
                     </div>
                     <div className={"col"}>
                         <div className={"row border-top border-bottom border-primary px-3"}>
                             {
-                                details.website === "" ? "N/A":
+                                details.website === "" ? "N/A" :
                                     <a className={"p-0"} href={details.website}>{details.website}</a>
                             }
 
                         </div>
-                        <div className={"row border-bottom border-primary px-3"}>{details.released === "" ? "N/A" : details.released}</div>
-                        <div className={"row border-bottom border-primary px-3"}>{details.metacritic === null ? "N/A" : details.metacritic}</div>
+                        <div
+                            className={"row border-bottom border-primary px-3"}>{details.released === "" ? "N/A" : details.released}</div>
+                        <div
+                            className={"row border-bottom border-primary px-3"}>{details.metacritic === null ? "N/A" : details.metacritic}</div>
                         <div className={"row border-bottom border-primary px-3"}>
                             {
-                                details.reddit_url === "" ? "N/A":
+                                details.reddit_url === "" ? "N/A" :
                                     <a className={"p-0"} href={details.reddit_url}>
                                         {details.reddit_url}
                                     </a>
@@ -142,7 +150,6 @@ const DetailsPage = () => {
                     </div>
                 </div>
             </div>
-
 
 
             <div className={"my-4"}>

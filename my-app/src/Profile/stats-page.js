@@ -35,7 +35,8 @@ const StatsPage = () => {
         currentUser &&
         <div>
             <Navigation/>
-            <button className={"btn btn-primary"} onClick={() => navigate(-1)}>Back</button>
+            <button className={"btn btn-primary"} onClick={() => navigate(-1)}><i
+                className="fa-solid fa-arrow-left"></i> Back</button>
             <h1>Your Stats</h1>
 
 

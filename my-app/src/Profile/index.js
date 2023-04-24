@@ -126,6 +126,8 @@ const ProfilePage = () => {
         }
     }, [currentUser, profileId])
 
+    const date = new Date(profile.createdOn)
+
     return ((currentUser || profileId) &&
         <>
             <Navigation/>
@@ -155,7 +157,12 @@ const ProfilePage = () => {
 
 
                         <h2>Joined on:</h2>
-                        <h5>{profile.createdOn}</h5>
+
+
+
+                        <h5>{
+                            date.toLocaleDateString()
+                        }</h5>
 
                         {currentUser !== null && (currentUser._id === profile._id || currentUser.role === "admin") &&
                             <div>
@@ -218,19 +225,27 @@ const ProfilePage = () => {
                 <ul className="nav nav-pills justify-content-center">
                     <li className="nav-item mx-1">
                         <Link className={`nav-link ${(userInfo === "likes") && "active"}`}
-                              to={profileId ? `/profile/${profile._id}/about/likes` : `/profile/about/likes`}>See Liked Games</Link>
+                              to={profileId ? `/profile/${profile._id}/about/likes` : `/profile/about/likes`}><i
+                            className="fa-solid fa-heart"></i> See Liked
+                            Games</Link>
                     </li>
                     <li className="nav-item mx-1">
                         <Link className={`nav-link ${userInfo === "comments" && "active"}`}
-                              to={profileId ? `/profile/${profile._id}/about/comments` : `/profile/about/comments`}>See Comments</Link>
+                              to={profileId ? `/profile/${profile._id}/about/comments` : `/profile/about/comments`}><i
+                            className="fa-solid fa-comment"></i> See
+                            Comments</Link>
                     </li>
                     <li className="nav-item mx-1">
                         <Link className={`nav-link ${userInfo === "following" && "active"}`}
-                              to={profileId ? `/profile/${profile._id}/about/following` : `/profile/about/following`}>See Following</Link>
+                              to={profileId ? `/profile/${profile._id}/about/following` : `/profile/about/following`}><i
+                            className="fa-solid fa-users"></i> See
+                            Following</Link>
                     </li>
                     <li className="nav-item mx-1">
                         <Link className={`nav-link ${userInfo === "followers" && "active"}`}
-                              to={profileId ? `/profile/${profile._id}/about/followers` : `/profile/about/followers`}>See Followers</Link>
+                              to={profileId ? `/profile/${profile._id}/about/followers` : `/profile/about/followers`}><i
+                            className="fa-solid fa-people-group"></i> See
+                            Followers</Link>
                     </li>
                 </ul>
 

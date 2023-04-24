@@ -42,26 +42,22 @@ const UserCommentsList = ({userId}) => {
                 {
                     userComments && userComments.map(post =>
 
-                        <div >
+                        <div key={post._id} className={"list-group-item position-relative"}>
 
                             On <Link to={`/details/${post.gameId}`}>{post.gameName}</Link>:
 
-                            <div className={"position-relative"}>
-                                <CommentItem key={post._id} post={post} />
-                                {
-                                    currentUser && (currentUser.role === "admin" || currentUser._id === userId) && (
-                                        <div className={"btn btn-danger position-absolute top-0 end-0"}
-                                             onClick={() => {
-                                                 deleteCommentHandler(post._id)
-                                             }}>X
-                                        </div>
-                                    )
-                                }
-                            </div>
 
+                            <CommentItem post={post}/>
+                            {
+                                currentUser && (currentUser.role === "admin" || currentUser._id === userId) && (
+                                    <div className={"btn btn-danger position-absolute top-0 end-0 m-2"}
+                                         onClick={() => {
+                                             deleteCommentHandler(post._id)
+                                         }}>X
+                                    </div>
+                                )
+                            }
 
-
-                            <hr></hr>
 
                         </div>
                     )

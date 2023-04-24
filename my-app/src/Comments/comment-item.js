@@ -12,6 +12,8 @@ const CommentItem = ({post}) => {
 
     const {currentUser} = useSelector(state => state.userData)
 
+    const date = new Date(post.time)
+
     useEffect( () => {
 
         const getCommentUserInfo = async () => {
@@ -31,7 +33,7 @@ const CommentItem = ({post}) => {
 
 
     return (
-        <div className="list-group-item p-1">
+        <div className=" p-1">
             <div className="row p-1">
                 <div className="col-md-1 col-2 p-1">
                     <Link to={`/profile/${userInfo._id}`}><img className="img-fluid rounded-circle m-2" width="48px" height="48px"
@@ -40,7 +42,7 @@ const CommentItem = ({post}) => {
 
                 <div className="col-md-11 col-10 py-2 px-4">
                     <div className="fw-bold">{userInfo.username}
-                        <span className="text-secondary fw-normal"> - {post.time}</span>
+                        <span className="text-secondary fw-normal"> - {date.toLocaleDateString()} @ {date.toLocaleTimeString()}</span>
                     </div>
                     <div className="text-secondary fw-normal">{post.commentText}</div>
                     <div className={"pt-3"}>

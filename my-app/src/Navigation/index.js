@@ -37,13 +37,13 @@ const Navigation = () => {
                 <ul className={"nav nav-pills "}>
                     {/*REFERECE: https://www.pluralsight.com/guides/applying-classes-conditionally-react*/}
                     <li className={"nav-item"}><Link className={`nav-link ${pathName === "/" ? "active" : ""}`}
-                                                     to={"/"}>Home</Link></li>
+                                                     to={"/"}><i className="fa-solid fa-house"></i> Home</Link></li>
                     {/*<li className={"nav-item"}><Link className={`nav-link ${pathName === "/details" ? "active" : ""}`}*/}
                     {/*                                 to={"/details"}>Details</Link></li>*/}
 
-                    <li className={"nav-item"}><Link
+                    <li className={"nav-item mx-1"}><Link
                         className={`nav-link ${(pathName.includes("/search") || pathName.includes("/results") || pathName.includes("/details")) ? "active" : ""}`}
-                        to={"/search"}>Search</Link></li>
+                        to={"/search"}><i className="fa-solid fa-magnifying-glass"></i> Search</Link></li>
                 </ul>
             </nav>
         </div>
