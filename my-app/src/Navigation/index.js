@@ -8,7 +8,7 @@ import {getGameDetails} from "../Services/game-service";
 const Navigation = () => {
     const pathName = useLocation().pathname;
 
-     const userData = useSelector(state => state.userData)
+    const userData = useSelector(state => state.userData)
 
     return (
         <div>
@@ -16,16 +16,23 @@ const Navigation = () => {
             <nav className={"navbar-dark py-3"}>
                 {userData.currentUser ?
                     <Link className={"nav-link"} to={"/profile"}>
-                        <img src={userData.currentUser.pfp} className={"img-thumbnail rounded-circle float-end"} width={55}
+
+
+                        <img src={userData.currentUser.pfp} className={"img-thumbnail rounded-circle float-end"}
+                             width={55}
                              height={55}/>
+                        <div className={"float-end align-middle my-3 me-2"}>{userData.currentUser.username}</div>
+
+
                     </Link>
                     :
                     <Link className={"nav-link"} to={"/login"}>
-                        <div  className={" rounded-circle float-end"} width={55}
+                        <div className={" rounded-circle float-end"} width={55}
                              height={55}>LOGIN
                         </div>
                     </Link>
                 }
+
                 {/*<Link className={"nav-link"} to={"/profile"}>*/}
                 {/*    <img*/}
                 {/*        src={userData ? "https://i1.sndcdn.com/avatars-HJxyKlpKxjj2upYS-quuw8g-t500x500.jpg" : userData.currentUser.pfp}*/}

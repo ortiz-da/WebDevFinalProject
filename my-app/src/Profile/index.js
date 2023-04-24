@@ -126,7 +126,12 @@ const ProfilePage = () => {
         }
     }, [currentUser, profileId])
 
-    const date = new Date(profile.createdOn)
+
+    let date = new Date()
+
+    if(profile) {
+    date = new Date(profile.createdOn)
+    }
 
     return ((currentUser || profileId) &&
         <>
