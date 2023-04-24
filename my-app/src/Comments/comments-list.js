@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 
 // code from tuiter
 
-const CommentList = ({gameId, newestComments}) => {
+const CommentList = ({gameId, newestComments, length}) => {
     const {comments, loading} = useSelector(
         state => state.commentsData)
 
@@ -19,7 +19,11 @@ const CommentList = ({gameId, newestComments}) => {
     const fetchGameComments = async () => {
         if (gameId === undefined) {
             console.log("NO GAME GIVEN")
-            const action = await findAllComments();
+            let action = await findAllComments();
+            if (length && length < action.length) {
+                action = action.slice(0, length)
+
+            }
             setGameComments(action)
         } else {
             console.log(`FINDING COMMENTS FOR GAME ${gameId}`)

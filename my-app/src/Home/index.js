@@ -89,7 +89,7 @@ const HomePage = () => {
 
             <h2>Latest Comments</h2>
 
-            <CommentsList newestComments={true}></CommentsList>
+            <CommentsList newestComments={true} length={2}></CommentsList>
         </div>
     )
 }
