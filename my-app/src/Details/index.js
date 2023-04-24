@@ -5,6 +5,8 @@ import {getGameDetails, likeGame, getGameLikesById, unlikeGame} from "../Service
 import CommentBox from "./comment-box";
 import CommentList from "../Comments/comments-list";
 import {useSelector} from "react-redux";
+import Modal from "react-modal";
+import {Link} from "react-router-dom";
 
 const DetailsPage = () => {
 
@@ -18,6 +20,9 @@ const DetailsPage = () => {
     const [likeCount, setLikeCount] = useState(0);
 
     const [hasLiked, setHasLiked] = useState(false)
+
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
 
 
     const fetchDetails = async () => {
@@ -54,6 +59,8 @@ const DetailsPage = () => {
 
     let navigate = useNavigate();
 
+
+
     const handleLikeButton = async () => {
 
         if (currentUser) {
@@ -69,16 +76,41 @@ const DetailsPage = () => {
                 setLikeCount(likeCount - 1)
             }
         } else {
-            navigate("/login")
+            setIsOpen(true)
         }
 
 
     }
+    Modal.setAppElement(document.getElementById('root'));
 
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+        },
+    };
 
     return (
         <>
             <Navigation/>
+
+            {/*// USING: https://www.npmjs.com/package/react-modal*/}
+            {/*// https://reactcommunity.org/react-modal/accessibility/*/}
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={() => setIsOpen(false)}
+                style={customStyles}
+            >
+                <p>You must be logged in to like and comment on games.</p>
+                <div className={"btn btn-primary mx-1"} onClick={() => navigate(`/login`)}>Login</div>
+                <div className={"btn btn-secondary"} onClick={() => setIsOpen(false)}>Close</div>
+
+
+            </Modal>
 
             <button className={"btn btn-primary"} onClick={() => navigate(-1)}><i
                 className="fa-solid fa-arrow-left"></i> Back
@@ -155,6 +187,9 @@ const DetailsPage = () => {
             <div className={"my-4"}>
                 <h2>Discussion</h2>
                 {currentUser && <CommentBox gameDetails={details}/>}
+                {
+                    !currentUser && <p className={"px-3"}>Must be logged in to comment <div><Link to={`/login`}>LOGIN</Link></div></p>
+                }
                 <CommentList gameId={gameId}/>
             </div>
 
