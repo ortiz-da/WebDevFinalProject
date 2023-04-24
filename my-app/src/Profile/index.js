@@ -145,22 +145,19 @@ const ProfilePage = () => {
                         {currentUser !== null && (currentUser._id === profile._id || currentUser.role === "admin") && isEditing ? (
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className="form-control mx-2"
                                     value={profile.username}
                                     onChange={(e) =>
                                         setProfile({...profile, username: e.target.value})
                                     }
                                 />
                             ) :
-                            <h5>{profile.username}</h5>
+                            <h5 className={"mx-2"}>{profile.username}</h5>
                         }
 
 
                         <h2>Joined on:</h2>
-
-
-
-                        <h5>{
+                        <h5 className={"mx-2"}>{
                             date.toLocaleDateString()
                         }</h5>
 
@@ -169,14 +166,14 @@ const ProfilePage = () => {
                                 <h2>Email:</h2>
                                 {isEditing ? <input
                                         type="text"
-                                        className="form-control"
+                                        className="form-control mx-2"
                                         value={profile.email}
                                         onChange={(e) =>
                                             setProfile({...profile, email: e.target.value})
                                         }
                                     />
                                     :
-                                    <h5>{profile.email}</h5>
+                                    <h5 className={"mx-2"}>{profile.email}</h5>
                                 }
                             </div>
                         }
@@ -194,19 +191,19 @@ const ProfilePage = () => {
                 }
 
                 {currentUser !== null && (currentUser._id === profile._id || currentUser.role === "admin") &&
-                    (<div>
+                    (<span>
                             <button className={"btn btn-primary"} onClick={() =>
                                 handleEditButton()}>{isEditing ? "Save" : "Edit"} <i className={"fa fa-pencil"}/>
                             </button>
-                        </div>
+                        </span>
                     )
                 }
                 {currentUser !== null && (currentUser._id === profile._id) &&
                     (
-                        <div className={"pt-2"}>
+                        <span className={"ps-2"}>
                             <button className={"btn btn-danger"} onClick={logout}>Log out <i
                                 className={"fa fa-sign-out"}/></button>
-                        </div>
+                        </span>
                     )
                 }
 

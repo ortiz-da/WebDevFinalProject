@@ -29,7 +29,7 @@ const UserLikesList = ({userId, length}) => {
     return (
         <div className={"row"}>
             {userLikes &&
-                userLikes.map(game => <div className={"col-auto my-5"}><GameCard gameId={game.gameId}/></div>
+                userLikes.map(game => <div className={"col-auto mb-5"}><GameCard gameId={game.gameId}/></div>
                 )
             }
         </div>

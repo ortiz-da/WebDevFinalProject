@@ -38,11 +38,10 @@ const CommentList = ({gameId, newestComments}) => {
         <ul className={"list-group"}>
             {
                 gameComments && gameComments.map(post =>
-                    <div className={"list-group-item"}>
+                    <div className={"list-group-item "}>
                         {newestComments ?
                         <div key={post._id}>On <Link to={`/details/${post.gameId}`}>{post.gameName}</Link>: <CommentItem
                             key={post._id} post={post}/>
-                            <hr></hr>
                         </div>
                         :
                         <CommentItem key={post._id} post={post}/>

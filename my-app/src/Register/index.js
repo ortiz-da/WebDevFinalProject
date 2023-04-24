@@ -23,6 +23,9 @@ const RegisterPage = () => {
 
     const navigate = useNavigate();
 
+    const [failed, setFailed] = useState(false)
+
+
     //USING CODE FROM: https://stackoverflow.com/questions/64517547/redux-thunk-caller-get-response
     const register = async () => {
         const result = await dispatch(registerThunk(user))
@@ -32,6 +35,7 @@ const RegisterPage = () => {
             const payload = unwrapResult(result)
             navigate("/profile")
         } catch (e) {
+            setFailed(true)
             console.log(e)
         }
     }
@@ -40,7 +44,7 @@ const RegisterPage = () => {
         <>
             <Navigation/>
             <h1>Register</h1>
-            <div className={"border rounded border-primary m-1 p-1 col-7 col-sm-7 col-md-6 col-lg-4 col-xl-3"}>
+            <div className={"border rounded border-primary m-1 p-3 col-7 col-sm-7 col-md-6 col-lg-4 col-xl-3"}>
 
                                         <label htmlFor={"email"}>Email</label>
                     <div id="email" className={"my-2"}><input type={"text"} placeholder={"Email"}
@@ -89,6 +93,12 @@ const RegisterPage = () => {
 
                     <button className={"btn btn-primary my-2 w"} onClick={register}>Register</button>
                 </div>
+
+            {failed ?
+
+                <p className={"text-danger my-3 px-3"}>Unable to create account. Please use a unique email and username.</p>
+                : null
+            }
 
 
         </>
