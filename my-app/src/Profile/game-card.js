@@ -31,7 +31,7 @@ const GameCard = ({gameId}) => {
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Video_Game_Controller_%2856431%29_-_The_Noun_Project.svg/640px-Video_Game_Controller_%2856431%29_-_The_Noun_Project.svg.png": gameDetails.background_image}
                          alt="Game Image"
                          style={{width: "100%", height: "18rem", objectFit: "cover"}}/>
-                    <div className="card-footer bg-black text-white" style={{minHeight: "4rem"}}>
+                    <div className="card-footer bg-light text-white" style={{minHeight: "4rem"}}>
                         {gameDetails.name}
                     </div>
                 </Link>

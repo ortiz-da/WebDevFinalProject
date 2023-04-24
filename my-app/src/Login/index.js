@@ -42,7 +42,7 @@ const LoginPage = () => {
             <div className={"border rounded border-primary m-1 p-3 p-1 col-7 col-sm-7 col-md-6 col-lg-4 col-xl-3"}>
 
                 <label htmlFor={"username"}>Username</label>
-                <div id={"username"} className={"my-2"}><input type={"text"} placeholder={"Username"}
+                <div  className={"my-2"}><input id={"username"} type={"text"} placeholder={"Username"}
                                                                value={user.username}
                                                                onChange={(e) => setUser({
                                                                    ...user,
@@ -50,7 +50,7 @@ const LoginPage = () => {
                                                                })}
                 ></input></div>
                 <label htmlFor={"password"}>Password</label>
-                <div id={"password"} className={"my-2"}><input type={"password"} placeholder={"Password"}
+                <div  className={"my-2"}><input id={"password"} type={"password"} placeholder={"Password"}
                                                                value={user.password}
 
                                                                onChange={(e) => setUser({

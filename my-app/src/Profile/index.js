@@ -140,10 +140,11 @@ const ProfilePage = () => {
                     </div>
                     <div className={"col-9"}>
                         <div></div>
-                        <h2>Username:</h2>
+                        <label htmlFor={"username"}><h2>Username:</h2></label>
 
                         {currentUser !== null && (currentUser._id === profile._id || currentUser.role === "admin") && isEditing ? (
                                 <input
+                                    id={"username"}
                                     type="text"
                                     className="form-control mx-2"
                                     value={profile.username}
@@ -163,14 +164,14 @@ const ProfilePage = () => {
 
                         {currentUser !== null && (currentUser._id === profile._id || currentUser.role === "admin") &&
                             <div>
-                                <h2>Email:</h2>
-                                {isEditing ? <input
-                                        type="text"
-                                        className="form-control mx-2"
-                                        value={profile.email}
-                                        onChange={(e) =>
-                                            setProfile({...profile, email: e.target.value})
-                                        }
+                                <label htmlFor={"email"}><h2>Email:</h2></label>
+                                {isEditing ? <input id={"email"}
+                                                    type="text"
+                                                    className="form-control mx-2"
+                                                    value={profile.email}
+                                                    onChange={(e) =>
+                                                        setProfile({...profile, email: e.target.value})
+                                                    }
                                     />
                                     :
                                     <h5 className={"mx-2"}>{profile.email}</h5>

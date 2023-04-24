@@ -94,6 +94,13 @@ const DetailsPage = () => {
         },
     };
 
+    let releaseDate = new Date(details.released)
+
+    // weird date stuff so its accurate
+    // but hollow knight isn't might just be wrong the game database?
+    releaseDate.setDate(releaseDate.getDate() + 1)
+    const dateString = details.released === "" ? "N/A" : releaseDate.toLocaleDateString()
+
     return (
         <>
             <Navigation/>
@@ -120,7 +127,7 @@ const DetailsPage = () => {
 
             <div className={"position-relative mb-2"}>
 
-                <img className={"img-fluid"} src={details.background_image}/>
+                <img className={"img-fluid rounded"} src={details.background_image}/>
                 {
 
                     <div
@@ -166,7 +173,7 @@ const DetailsPage = () => {
 
                         </div>
                         <div
-                            className={"row border-bottom border-primary px-3"}>{details.released === "" ? "N/A" : details.released}</div>
+                            className={"row border-bottom border-primary px-3"}>{dateString}</div>
                         <div
                             className={"row border-bottom border-primary px-3"}>{details.metacritic === null ? "N/A" : details.metacritic}</div>
                         <div className={"row border-bottom border-primary px-3"}>

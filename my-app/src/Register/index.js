@@ -46,57 +46,58 @@ const RegisterPage = () => {
             <h1>Register</h1>
             <div className={"border rounded border-primary m-1 p-3 col-7 col-sm-7 col-md-6 col-lg-4 col-xl-3"}>
 
-                                        <label htmlFor={"email"}>Email</label>
-                    <div id="email" className={"my-2"}><input type={"text"} placeholder={"Email"}
-                                                              value={user.email}
-                                                              onChange={(e) => setUser({
-                                                                  ...user,
-                                                                  email: e.target.value
-                                                              })}
-                    ></input></div>
+                <label htmlFor={"email"}>Email</label>
+                <div className={"my-2"}><input id="email" type={"text"} placeholder={"Email"}
+                                               value={user.email}
+                                               onChange={(e) => setUser({
+                                                   ...user,
+                                                   email: e.target.value
+                                               })}
+                ></input></div>
 
-                    <label htmlFor={"username"}>Username</label>
-                    <div id="username" className={"my-2"}><input type={"text"} placeholder={"Username"}
-                                                                 value={user.username}
-                                                                 onChange={(e) => setUser({
-                                                                     ...user,
-                                                                     username: e.target.value
-                                                                 })}
-                    ></input></div>
+                <label htmlFor={"username"}>Username</label>
+                <div className={"my-2"}><input id="username" type={"text"} placeholder={"Username"}
+                                               value={user.username}
+                                               onChange={(e) => setUser({
+                                                   ...user,
+                                                   username: e.target.value
+                                               })}
+                ></input></div>
 
-                    <label htmlFor={"password"}>Password</label>
-                    <div id="password" className={"my-2"}><input type={"text"} placeholder={"Password"}
-                                                                 value={user.password}
+                <label htmlFor={"password"}>Password</label>
+                <div className={"my-2"}><input id="password" type={"text"} placeholder={"Password"}
+                                               value={user.password}
 
-                                                                 onChange={(e) => setUser({
-                                                                     ...user,
-                                                                     password: e.target.value
-                                                                 })}></input></div>
+                                               onChange={(e) => setUser({
+                                                   ...user,
+                                                   password: e.target.value
+                                               })}></input></div>
 
-                    <label htmlFor={"pfp"}>Profile Picture URL</label>
-                    <div id="pfp" className={"my-2"}><input type={"text"} placeholder={"Profile Picture URL"}
-                                                            value={user.pfp}
+                <label htmlFor={"pfp"}>Profile Picture URL</label>
+                <div className={"my-2"}><input id="pfp" type={"text"} placeholder={"Profile Picture URL"}
+                                               value={user.pfp}
 
-                                                            onChange={(e) => setUser({
-                                                                ...user,
-                                                                pfp: e.target.value
-                                                            })}></input></div>
-                    <div>
-                        <label htmlFor={"admin-check"}>Admin</label>
-                        <input className={"d-block"} id={"admin-check"}
-                               type={"checkbox"}
-                               onChange={(e) => setUser({
-                                   ...user,
-                                   role: e.target.checked ? "admin" : "normal"
-                               })}/>
-                    </div>
-
-                    <button className={"btn btn-primary my-2 w"} onClick={register}>Register</button>
+                                               onChange={(e) => setUser({
+                                                   ...user,
+                                                   pfp: e.target.value
+                                               })}></input></div>
+                <div>
+                    <label htmlFor={"admin-check"}>Admin</label>
+                    <input className={"d-block"} id={"admin-check"}
+                           type={"checkbox"}
+                           onChange={(e) => setUser({
+                               ...user,
+                               role: e.target.checked ? "admin" : "normal"
+                           })}/>
                 </div>
+
+                <button className={"btn btn-primary my-2 w"} onClick={register}>Register</button>
+            </div>
 
             {failed ?
 
-                <p className={"text-danger my-3 px-3"}>Unable to create account. Please use a unique email and username.</p>
+                <p className={"text-danger my-3 px-3"}>Unable to create account. Please use a unique email and
+                    username.</p>
                 : null
             }
 

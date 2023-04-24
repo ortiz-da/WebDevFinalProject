@@ -69,27 +69,31 @@ const HomePage = () => {
             }
 
 
-            <Slider
-                slideIndex={2}
-                duration={3000}
-                infinte={true}
-                autoplay={2000}
-            >
-                {slides.map((slide, index) =>
-                    <div key={index}>
-                        {/*https://stackoverflow.com/questions/12082913/with-css-how-do-i-make-an-image-span-the-full-width-of-the-page-as-a-background*/}
-                        {/*https://stackoverflow.com/questions/37287153/how-to-get-images-in-bootstraps-card-to-be-the-same-height-width*/}
-                        <Link to={`/details/${slide.id}`}>
-                            <img src={slide.image} className={"rounded"} width={"100%"} height={"100%"} style={{objectFit: "cover"}}/>
-                        </Link>
+            {
+                !currentUser && <Slider
+                    slideIndex={2}
+                    duration={3000}
+                    infinte={true}
+                    autoplay={2000}
+                >
+                    {slides.map((slide, index) =>
+                        <div key={index}>
+                            {/*https://stackoverflow.com/questions/12082913/with-css-how-do-i-make-an-image-span-the-full-width-of-the-page-as-a-background*/}
+                            {/*https://stackoverflow.com/questions/37287153/how-to-get-images-in-bootstraps-card-to-be-the-same-height-width*/}
+                            <Link to={`/details/${slide.id}`}>
+                                <img src={slide.image} className={"rounded"} width={"100%"} height={"100%"}
+                                     style={{objectFit: "cover"}}/>
+                            </Link>
 
-                    </div>)}
-            </Slider>
+                        </div>)}
+                </Slider>
+            }
+
             <hr/>
 
             <h2>Latest Comments</h2>
 
-            <CommentsList newestComments={true} length={2}></CommentsList>
+            <CommentsList newestComments={true} length={3}></CommentsList>
         </div>
     )
 }
