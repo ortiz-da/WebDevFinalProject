@@ -46,7 +46,7 @@ const HomePage = () => {
                 currentUser ?
                     <div className={"my-4"}>
                         <p>Re-visit some of your liked games:</p>
-                        <UserLikesList userId={currentUser._id} length={3} />
+                        <UserLikesList userId={currentUser._id} length={3}/>
                     </div>
                     :
                     <div><p>🎮This site is made for gamers like you, so you should feel right at
@@ -54,7 +54,9 @@ const HomePage = () => {
                         <p>Features include:</p>
                         <ul className={"list-group border border-secondary my-4"}>
                             <li className={"list-group-item"}>🕹️ Searching a massive game database</li>
-                            <li className={"list-group-item"}>❤️️ Liking games, which can then be found on your profile</li>
+                            <li className={"list-group-item"}>❤️️ Liking games, which can then be found on your
+                                profile
+                            </li>
                             <li className={"list-group-item"}>🗨️️ Comment on your favorite games for others to see</li>
                             <li className={"list-group-item"}>👾️ Following users and seeing what they're up to</li>
                         </ul>
@@ -76,8 +78,9 @@ const HomePage = () => {
                 {slides.map((slide, index) =>
                     <div key={index}>
                         {/*https://stackoverflow.com/questions/12082913/with-css-how-do-i-make-an-image-span-the-full-width-of-the-page-as-a-background*/}
+                        {/*https://stackoverflow.com/questions/37287153/how-to-get-images-in-bootstraps-card-to-be-the-same-height-width*/}
                         <Link to={`/details/${slide.id}`}>
-                            <img src={slide.image} width={"100%"} height={"auto"}/>
+                            <img src={slide.image} className={"rounded"} width={"100%"} height={"100%"} style={{objectFit: "cover"}}/>
                         </Link>
 
                     </div>)}
