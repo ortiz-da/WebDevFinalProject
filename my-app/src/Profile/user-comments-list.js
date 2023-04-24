@@ -49,7 +49,7 @@ const UserCommentsList = ({userId}) => {
 
                             <CommentItem post={post}/>
                             {
-                                currentUser && (currentUser.role === "admin" || currentUser._id === userId) && (
+                                currentUser && (currentUser.role === "admin") && (
                                     <div className={"btn btn-danger position-absolute top-0 end-0 m-2"}
                                          onClick={() => {
                                              deleteCommentHandler(post._id)
